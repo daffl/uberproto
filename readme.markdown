@@ -58,7 +58,6 @@ The _init_ method will be used as the constructor.
 That way you can define a simple Person object (which will be gradually extended
 throughout the next paragraphs):
 
-	```javascript
 	var Person = Proto.extend({
 		init : function(name)
 		{
@@ -70,7 +69,6 @@ throughout the next paragraphs):
 			return this.name;
 		}
 	});
-	```
 	
 ### Initialize
 
@@ -113,8 +111,8 @@ if we also knew the last name:
 
 ### Mixins
 
-Mixins work similar to extending objects, but you add functionality
-to an existing objects instead of creating a new one. Mixins can also
+Mixins work similar to extending objects, but it adds functionality
+to an existing object instead of creating a new one. Mixins can also
 access their super methods using *this.\_super*. This will either refer
 the overwritten method on the object itself or the one on the prototype:
 
@@ -133,7 +131,7 @@ the overwritten method on the object itself or the one on the prototype:
 	
 	var dude = Person.create('Dude');
 	console.log(dude.sing()); // -> 'Laaaa'
-	console.log(dude.can_sing)l // -> true
+	console.log(dude.can_sing); // -> true
 
 Actual instances can be mixed in just the same:
 

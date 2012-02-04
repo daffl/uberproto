@@ -1,17 +1,21 @@
+var Proto = require('../lib/proto');
 
-test("Test extend", function() {
-	expect(2);
+exports.extend = function(test) {
+	test.expect(2);
+	
+	console.log(Proto);
 	
 	var Extended = Proto.extend({
 		sayHi : function() {
-			ok(true, 'sayHi called');
+			test.ok(true, 'sayHi called');
 			return 'hi';
 		}
 	});
 	
-	equal(Extended.create().sayHi(), "hi", "Said hi");
-});
-
+	test.equal(Extended.create().sayHi(), "hi", "Said hi");
+	test.done();
+};
+/*
 test("Test create", function() {
 	expect(3);
 	
@@ -101,3 +105,5 @@ test("Test proxy", function() {
 	callback = inst.proxy('test');
 	equal(callback('arg'), 'Tester arg', 'Callback set scope properly');		
 });
+*/
+
