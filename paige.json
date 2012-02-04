@@ -1,0 +1,10 @@
+{
+	"title": "UberProto",
+	"content_file": "readme.markdown",
+	"include_index": false,
+	"header": "UberProto",
+	"subheader": "JavaScript object inheritance sugar",
+	"background": "whitey",
+	"docco_files": "test/*.js",
+	"github" : "https://github.com/daffl/uberproto"
+}

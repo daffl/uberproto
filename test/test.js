@@ -1,3 +1,4 @@
+
 test("Test extend", function() {
 	expect(2);
 	

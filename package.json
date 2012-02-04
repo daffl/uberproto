@@ -1,0 +1,21 @@
+{
+  "name": "uberproto",
+  "description": "JavaScript object inheritance sugar",
+  "version": "0.0.9",
+  "homepage": "http://daffl.github.com/uberproto",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/daffl/uberproto.git"
+  },
+  "author": "David Luecke <daff@neyeon.com> (http://neyeon.com)",
+  "main": "lib/proto",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "nodeunit test"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
