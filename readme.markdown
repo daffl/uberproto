@@ -1,5 +1,7 @@
 Uberproto is a simple base object that adds some sugar to ECMAScript 5 style object inheritance
-in JavaScript. What it can do:
+in JavaScript.
+
+Here is what it can do in a nutshell:
 
 - Easily extend objects
 - Initialization methods
@@ -52,10 +54,11 @@ Dependencies load synchronously like a normal _require_ does.
 You can extend any UberProto object by using *extend* to create a
 new object that inherits from the current one. Internally Object.create is
 being used and the prototype is set to the object that you are extending.
-When extending an object the _init_ method will be used as the constructor.
+The _init_ method will be used as the constructor.
 That way you can define a simple Person object (which will be gradually extended
 throughout the next paragraphs):
 
+	``` javascript
 	var Person = Proto.extend({
 		init : function(name)
 		{
@@ -67,12 +70,13 @@ throughout the next paragraphs):
 			return this.name;
 		}
 	});
+	```
 	
 ### Initialize
 
 You can create a new instance by calling _create_:	
 
-	var dave = Person.create('Dave', 'Doe');
+	var dave = Person.create('Dave');
 	console.log(dave.firstname); // -> 'Dave'
 	console.log(dave.fullName()); // -> 'Dave'
 
