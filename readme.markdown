@@ -58,7 +58,7 @@ The _init_ method will be used as the constructor.
 That way you can define a simple Person object (which will be gradually extended
 throughout the next paragraphs):
 
-	``` javascript
+	```javascript
 	var Person = Proto.extend({
 		init : function(name)
 		{
