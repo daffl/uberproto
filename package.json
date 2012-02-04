@@ -1,6 +1,6 @@
 {
   "name": "uberproto",
-  "description": "JavaScript object inheritance sugar",
+  "description": "JavaScript object inheritance sugar: Easy extension, mixins, super methods, proxies",
   "version": "0.0.9",
   "homepage": "http://daffl.github.com/uberproto",
   "repository": {
