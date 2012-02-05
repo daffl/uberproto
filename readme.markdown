@@ -9,12 +9,12 @@ Here is what it can do in a nutshell:
 - Mixins
 - Method proxies
 
-With a small footprint (0.7Kb minified, 0.4Kb minified and compressed) and an easy to handle
-API (5 methods) it also doesn't add a lot of baggage to your JavaScript application.
+With a small footprint (0.7Kb minified and 0.4Kb compressed) and an easy to handle
+API of just four methods it also doesn't add a lot of baggage to your JavaScript application.
 
 ## Usage
 
-UberProto is wrapped in an CommonJS AMD module which can be used with NodeJS, RequireJS and any
+UberProto can be used as a CommonJS AMD module NodeJS, RequireJS and any
 other loader that implements asynchronous modules. If no module loader is available, the global
 variable _Proto_ will be defined after you include the script.
 To be compatible with all browsers, you also need the ES5-shim.
@@ -75,7 +75,7 @@ throughout the next paragraphs):
 You can create a new instance by calling _create_:	
 
 	var dave = Person.create('Dave');
-	console.log(dave.firstname); // -> 'Dave'
+	console.log(dave.name); // -> 'Dave'
 	console.log(dave.fullName()); // -> 'Dave'
 
 Overwriting _create_ is great if you want to customize the way objects are being
@@ -143,7 +143,7 @@ Actual instances can be mixed in just the same:
 		}
 	});
 
-	console.log(newSinger.sing()); // -> 'Laaaa Laalaaa!
+	console.log(operaSinger.sing()); // -> 'Laaaa Laalaaa!
 
 ### Method proxy
 

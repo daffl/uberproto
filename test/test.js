@@ -3,8 +3,6 @@ var Proto = require('../lib/proto');
 exports.extend = function(test) {
 	test.expect(2);
 	
-	console.log(Proto);
-	
 	var Extended = Proto.extend({
 		sayHi : function() {
 			test.ok(true, 'sayHi called');
