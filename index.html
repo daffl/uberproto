@@ -1,0 +1,154 @@
+<!DOCTYPE html> <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">      <title>UberProto</title>   <style>     body {       font-size: 16px;       line-height: 24px;       background: #fff url("bg.png");       color: #252519;       font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif;       padding: 0 0 50px 50px;     }     div.container {       width: 720px;       margin: 50px 0 50px 50px;     }     p {       width: 550px;     }       #documentation p {         margin-bottom: 4px;       }     a, a:visited {       padding: 0 2px;       text-decoration: none;       background: #dbe6f3;       color: #3f6fa5;     }     a:active, a:hover {       color: #dbe6f3;       background: #3f6fa5;     }     h1, h2, h3, h4, h5, h6 {       margin-top: 40px;       width: 550px;       line-height: 1.25em;     }     b.header {       font-size: 18px;     }     span.alias {       font-size: 14px;       font-style: italic;       margin-left: 20px;     }     table, tr, td {       margin: 0; padding: 0;     }       td {         padding: 2px 12px 2px 0;       }     ul {       list-style-type: circle;       padding: 0 0 0 20px;     }       li {         width: 500px;         margin-bottom: 10px;       }     code, pre, tt {       font-family: Monaco, Consolas, "Lucida Console", monospace;       font-size: 12px;       line-height: 18px;       color: #555529;     }       pre {         font-size: 12px;         padding: 2px 0 2px 12px;         border-left: 6px solid #aaaa99;         margin: 0px 0 30px;       }            #ribbon {      line-height: 0;     }          #ribbon:hover {      background: none;     }          #ribbon img {      position: fixed;      top: 0;      right: 0;      border: 0;      z-index: 2;     }   </style> </head> <body>      <a id="ribbon" href="https://github.com/daffl/uberproto">    <img src="https://a248.e.akamai.net/assets.github.com/img/71eeaab9d563c2b3c590319b398dd35683265e85/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67"      alt="Fork me on GitHub"></a>      <h1>UberProto</h1>        <em>JavaScript object inheritance sugar</em>         <p>Uberproto is a simple base object that adds some sugar to ECMAScript 5 style object inheritance
+in JavaScript.</p>
+
+<p>Here is what it can do in a nutshell:</p>
+
+<ul>
+<li>Easily extend objects</li>
+<li>Initialization methods</li>
+<li>Super methods</li>
+<li>Mixins</li>
+<li>Method proxies</li>
+</ul>
+
+<p>With a small footprint (0.8Kb minified and 0.4Kb compressed) and an easy to handle
+API of just four methods it also doesn't add a lot of baggage to your JavaScript application.</p>
+
+<h2>Usage</h2>
+
+<p>UberProto can be used as a CommonJS AMD module (e.g. with RequireJS), NodeJS or directly
+in the browser. If no module loader is available, the global variable <em>Proto</em>
+will be defined after you include the script.
+To be compatible with all browsers, you also need the ES5-shim.</p>
+
+<h3>Using AMD (e.g. RequireJS)</h3>
+
+<p>Make sure proto.js is in the right folder and then just define a module like this:</p>
+
+<pre><code>define(['proto'], function(Proto) {
+    // Source goes here
+});</code></pre>
+
+<h3>Straight in the browser</h3>
+
+<pre><code>&lt;script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/1.2.4/es5-shim.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="proto.min.js"&gt;&lt;/script&gt;</code></pre>
+
+<p>Now <em>Proto</em> is available as a global vairable.</p>
+
+<h3>With NodeJS</h3>
+
+<p>After installing the package using NPM</p>
+
+<blockquote>
+  <p>npm install uberproto</p>
+</blockquote>
+
+<p>just require it like any other module:</p>
+
+<pre><code>var Proto = require('uberproto');</code></pre>
+
+<h2>Creating objects</h2>
+
+<h3>Extend</h3>
+
+<p>You can extend any UberProto object by using <em>extend</em> to create a
+new object that inherits from the current one. Internally Object.create is
+being used and the prototype is set to the object that you are extending.
+If defined, the <em>init</em> method will be used as the constructor.
+That way you can define a simple Person object (which will be reused
+throughout the next paragraphs):</p>
+
+<pre><code>var Person = Proto.extend({
+    init : function(name)
+    {
+        this.name = name;
+    },
+
+    fullName : function()
+    {
+        return this.name;
+    }
+});</code></pre>
+
+<h3>Initialize</h3>
+
+<p>You can create a new instance by calling <em>create</em>:    </p>
+
+<pre><code>var dave = Person.create('Dave');
+console.log(dave.name); // -&gt; 'Dave'
+console.log(dave.fullName()); // -&gt; 'Dave'</code></pre>
+
+<p>Overwriting <em>create</em> is great if you want to customize the way objects are being
+instantiated.</p>
+
+<h3>Super methods</h3>
+
+<p>In each method <em>this._super</em> refers to the method being overwritten,
+if there is one. For our Person object, for example, it would be a lot better
+if it also had a last name:</p>
+
+<pre><code>var BetterPerson = Person.extend({
+    init : function(name, lastname)
+    {
+        // If you want to pass all original arguments to the
+        // _super method just use apply:
+        // this._super.apply(this, arguments);
+
+        this._super(name);
+        this.lastname = lastname;
+    },
+
+    fullName : function()
+    {
+        return this._super() + ' ' + this.lastname;
+    }
+});
+
+var dave = BetterPerson.create('Dave', 'Doe');
+console.log(dave.name); // -&gt; 'Dave'
+console.log(dave.lastname); // -&gt; 'Doe'
+console.log(dave.fullName()); // -&gt; 'Dave Doe'</code></pre>
+
+<h3>Mixins</h3>
+
+<p>Mixins add functionality to an existing object. Mixins can also
+access their super methods using <em>this._super</em>. This will either refer
+the overwritten method on the object itself or the one on the prototype:</p>
+
+<pre><code>Person.mixin({
+    init : function()
+    {
+        this._super.apply(this, arguments);
+        this.can_sing = true;
+    },
+
+    sing : function()
+    {
+        return 'Laaaa';
+    }
+});
+
+var dude = Person.create('Dude');
+console.log(dude.sing()); // -&gt; 'Laaaa'
+console.log(dude.can_sing); // -&gt; true</code></pre>
+
+<p>Actual instances can be mixed in just the same:</p>
+
+<pre><code>var operaSinger = Person.create('Pavarotti');
+operaSinger.mixin({
+    sing : function()
+    {
+        return this._super() + ' Laalaaa!';
+    }
+});
+
+console.log(operaSinger.sing()); // -&gt; 'Laaaa Laalaaa!</code></pre>
+
+<h3>Method proxy</h3>
+
+<p>You can create proxy callbacks, that make sure that <em>this</em> will always
+point to the right object:</p>
+
+<pre><code>var callback = operaSinger.proxy('fullName');
+console.log(callback()); // -&gt; 'Pavarotti'</code></pre> </body> </html>
