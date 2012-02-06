@@ -14,10 +14,11 @@ API of just four methods it also doesn't add a lot of baggage to your JavaScript
 
 ## Usage
 
-UberProto can be used as a CommonJS AMD module (e.g. with RequireJS), NodeJS or directly
+UberProto can be used as a [CommonJS AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module
+(e.g. with [RequireJS](http://requirejs.org/)), [NodeJS](http://nodejs.org) or directly
 in the browser. If no module loader is available, the global variable _Proto_
 will be defined after you include the script.
-To be compatible with all browsers, you also need the ES5-shim.
+To be compatible with all browsers, you also need the [ES5-shim](https://github.com/kriskowal/es5-shim).
 
 ### Using AMD (e.g. RequireJS)
 
