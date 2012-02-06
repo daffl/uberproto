@@ -13,7 +13,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "nodeunit test"
+    "test": "nodeunit test/test.js"
   },
   "engines": {
     "node": "*"

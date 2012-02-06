@@ -9,14 +9,14 @@ Here is what it can do in a nutshell:
 - Mixins
 - Method proxies
 
-With a small footprint (0.7Kb minified and 0.4Kb compressed) and an easy to handle
+With a small footprint (0.8Kb minified and 0.4Kb compressed) and an easy to handle
 API of just four methods it also doesn't add a lot of baggage to your JavaScript application.
 
 ## Usage
 
-UberProto can be used as a CommonJS AMD module NodeJS, RequireJS and any
-other loader that implements asynchronous modules. If no module loader is available, the global
-variable _Proto_ will be defined after you include the script.
+UberProto can be used as a CommonJS AMD module (e.g. with RequireJS), NodeJS or directly
+in the browser. If no module loader is available, the global variable _Proto_
+will be defined after you include the script.
 To be compatible with all browsers, you also need the ES5-shim.
 
 ### Using AMD (e.g. RequireJS)
@@ -44,9 +44,6 @@ just require it like any other module:
 
 	var Proto = require('uberproto');
 
-As a side note: For compatibility reasons NodeJS also supports AMD style modules.
-Dependencies load synchronously like a normal _require_ does.
-
 ## Creating objects
 
 ### Extend
@@ -54,8 +51,8 @@ Dependencies load synchronously like a normal _require_ does.
 You can extend any UberProto object by using *extend* to create a
 new object that inherits from the current one. Internally Object.create is
 being used and the prototype is set to the object that you are extending.
-The _init_ method will be used as the constructor.
-That way you can define a simple Person object (which will be gradually extended
+If defined, the _init_ method will be used as the constructor.
+That way you can define a simple Person object (which will be reused
 throughout the next paragraphs):
 
 	var Person = Proto.extend({
@@ -85,7 +82,7 @@ instantiated.
 	
 In each method *this.\_super* refers to the method being overwritten,
 if there is one. For our Person object, for example, it would be a lot better
-if we also knew the last name:
+if it also had a last name:
 
 	var BetterPerson = Person.extend({
 		init : function(name, lastname)
@@ -111,8 +108,7 @@ if we also knew the last name:
 
 ### Mixins
 
-Mixins work similar to extending objects, but it adds functionality
-to an existing object instead of creating a new one. Mixins can also
+Mixins add functionality to an existing object. Mixins can also
 access their super methods using *this.\_super*. This will either refer
 the overwritten method on the object itself or the one on the prototype:
 
@@ -148,7 +144,7 @@ Actual instances can be mixed in just the same:
 ### Method proxy
 
 You can create proxy callbacks, that make sure that _this_ will always
-point to the actual object:
+point to the right object:
 	
 	var callback = operaSinger.proxy('fullName');
 	console.log(callback()); // -> 'Pavarotti'
