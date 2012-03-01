@@ -67,7 +67,7 @@ throughout the next paragraphs):
 			return this.name;
 		}
 	});
-	
+
 ### Initialize
 
 You can create a new instance by calling _create_:	
@@ -149,3 +149,64 @@ point to the right object:
 	
 	var callback = operaSinger.proxy('fullName');
 	console.log(callback()); // -> 'Pavarotti'
+
+## Extending existing objects
+
+Although it is the default functionality, you don't have to inherit from the UberProto base object to use it's
+functionality. *extend*, *mixin* and *proxy* are all able to take an existing object as the second parameter:
+
+	var Person = {
+		fullName : function()
+		{
+			return this.name;
+		}
+	};
+
+
+### Mixin
+
+	// Mix in a setName method.
+	Proto.mixin({
+		setName : function(name) {
+			this.name = name;
+		}
+	}, Person);
+
+	// Create a new Person instance
+	var instance = Object.create(Person);
+	instance.setName('Dude');
+	console.log(instance.fullName()); // -> Dude
+
+	// Create a proxy
+	var callback = Proto.proxy('fullName', instance);
+	console.log(callback()); // -> Dude
+
+	// Extend Person and return the extended object
+	// _super works as usual for extend and mixin
+	var Extended = Proto.extend({
+		fullName : function()
+		{
+			return this.lastname + " " + this._super();
+		},
+
+		setName : function(name, lastname)
+		{
+			this._super(name);
+			this.lastname = lastname;
+		}
+	}, Person);
+
+	var extendedInstance = Object.create(Extended);
+    extendedInstance.setName('Dude', 'The');
+    console.log(extendedInstance.fullName()); // -> The Dude
+
+To use the *init* constructor method you can simply call *create*:
+
+	var Person = {
+		init : function(name) {
+			this.name = name;
+		}
+	}
+
+	var instance = Proto.create.call(Person, 'Dude');
+

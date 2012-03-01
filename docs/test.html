@@ -58,6 +58,33 @@
     
     <span class="kd">var</span> <span class="nx">inst</span> <span class="o">=</span> <span class="nx">Sub</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;Tester&#39;</span><span class="p">);</span>
     <span class="nx">test</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">inst</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="s1">&#39;Tester&#39;</span><span class="p">,</span> <span class="s1">&#39;Name set in prototype&#39;</span><span class="p">);</span>
+
+    <span class="nx">test</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span>
+  <span class="p">},</span>
+
+  <span class="nx">extendObject</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">test</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">test</span><span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">Obj</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">test</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="nx">test</span><span class="p">.</span><span class="nx">ok</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="s1">&#39;Super test method called&#39;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="kd">var</span> <span class="nx">Extended</span> <span class="o">=</span> <span class="nx">Proto</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+      <span class="nx">test</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_super</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+        <span class="nx">test</span><span class="p">.</span><span class="nx">ok</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="s1">&#39;Sub init called&#39;</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="nx">Obj</span><span class="p">);</span>
+
+    <span class="nx">Extended</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s1">&#39;Tester&#39;</span><span class="p">);</span>
+
+    <span class="nx">test</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">Extended</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="s1">&#39;Tester&#39;</span><span class="p">,</span> <span class="s1">&#39;Name set in prototype&#39;</span><span class="p">);</span>
+
     <span class="nx">test</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span>
   <span class="p">},</span>
 
@@ -89,6 +116,32 @@
     <span class="p">});</span>
     
     <span class="nx">test</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">inst</span><span class="p">.</span><span class="nx">test</span><span class="p">(),</span> <span class="s1">&#39;Tester mixed in&#39;</span><span class="p">,</span> <span class="s1">&#39;Mixin called overwritten&#39;</span><span class="p">);</span>
+    <span class="nx">test</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span>
+  <span class="p">},</span>
+
+  <span class="nx">mixinObject</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">test</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">test</span><span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+    <span class="kd">var</span> <span class="nx">Obj</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">test</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="nx">test</span><span class="p">.</span><span class="nx">ok</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="s1">&#39;Super test method called&#39;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">Proto</span><span class="p">.</span><span class="nx">mixin</span><span class="p">({</span>
+      <span class="nx">test</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_super</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+        <span class="nx">test</span><span class="p">.</span><span class="nx">ok</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="s1">&#39;Sub init called&#39;</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">},</span> <span class="nx">Obj</span><span class="p">);</span>
+
+    <span class="nx">Obj</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="s1">&#39;Tester&#39;</span><span class="p">);</span>
+
+    <span class="nx">test</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">Obj</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="s1">&#39;Tester&#39;</span><span class="p">,</span> <span class="s1">&#39;Name set in prototype&#39;</span><span class="p">);</span>
+
     <span class="nx">test</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span>
   <span class="p">},</span>
 

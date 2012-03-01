@@ -152,4 +152,63 @@ console.log(operaSinger.sing()); // -&gt; 'Laaaa Laalaaa!</code></pre>
 point to the right object:</p>
 
 <pre><code>var callback = operaSinger.proxy('fullName');
-console.log(callback()); // -&gt; 'Pavarotti'</code></pre> </body> </html>
+console.log(callback()); // -&gt; 'Pavarotti'</code></pre>
+
+<h2>Extending existing objects</h2>
+
+<p>Although it is the default functionality, you don't have to inherit from the UberProto base object to use it's
+functionality. <em>extend</em>, <em>mixin</em> and <em>proxy</em> are all able to take an existing object as the second parameter:</p>
+
+<pre><code>var Person = {
+    fullName : function()
+    {
+        return this.name;
+    }
+};</code></pre>
+
+<h3>Mixin</h3>
+
+<pre><code>// Mix in a setName method.
+Proto.mixin({
+    setName : function(name) {
+        this.name = name;
+    }
+}, Person);
+
+// Create a new Person instance
+var instance = Object.create(Person);
+instance.setName('Dude');
+console.log(instance.fullName()); // -&gt; Dude
+
+// Create a proxy
+var callback = Proto.proxy('fullName', instance);
+console.log(callback()); // -&gt; Dude
+
+// Extend Person and return the extended object
+// _super works as usual for extend and mixin
+var Extended = Proto.extend({
+    fullName : function()
+    {
+        return this.lastname + " " + this._super();
+    },
+
+    setName : function(name, lastname)
+    {
+        this._super(name);
+        this.lastname = lastname;
+    }
+}, Person);
+
+var extendedInstance = Object.create(Extended);
+extendedInstance.setName('Dude', 'The');
+console.log(extendedInstance.fullName()); // -&gt; The Dude</code></pre>
+
+<p>To use the <em>init</em> constructor method you can simply call <em>create</em>:</p>
+
+<pre><code>var Person = {
+    init : function(name) {
+        this.name = name;
+    }
+}
+
+var instance = Proto.create.call(Person, 'Dude');</code></pre> </body> </html>

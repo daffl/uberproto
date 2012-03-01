@@ -58,6 +58,33 @@ this.suite = {
 		
 		var inst = Sub.create('Tester');
 		test.equal(inst.name, 'Tester', 'Name set in prototype');
+
+		test.done();
+	},
+
+	extendObject : function(test)
+	{
+		test.expect(3);
+
+		var Obj = {
+			test : function(name)
+			{
+				test.ok(true, 'Super test method called');
+				this.name = name;
+			}
+		};
+
+		var Extended = Proto.extend({
+			test : function() {
+				this._super.apply(this, arguments);
+				test.ok(true, 'Sub init called');
+			}
+		}, Obj);
+
+		Extended.test('Tester');
+
+		test.equal(Extended.name, 'Tester', 'Name set in prototype');
+
 		test.done();
 	},
 
@@ -89,6 +116,32 @@ this.suite = {
 		});
 		
 		test.equal(inst.test(), 'Tester mixed in', 'Mixin called overwritten');
+		test.done();
+	},
+
+	mixinObject : function(test)
+	{
+		test.expect(3);
+
+		var Obj = {
+			test : function(name)
+			{
+				test.ok(true, 'Super test method called');
+				this.name = name;
+			}
+		};
+
+		Proto.mixin({
+			test : function() {
+				this._super.apply(this, arguments);
+				test.ok(true, 'Sub init called');
+			}
+		}, Obj);
+
+		Obj.test('Tester');
+
+		test.equal(Obj.name, 'Tester', 'Name set in prototype');
+
 		test.done();
 	},
 
