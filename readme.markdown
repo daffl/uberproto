@@ -152,7 +152,7 @@ point to the right object:
 
 ## Extending existing objects
 
-Although it is the default functionality, you don't have to inherit from the UberProto base object to use it's
+Although it is the default functionality, you don't have to inherit from the UberProto base object to use its
 functionality. *extend*, *mixin* and *proxy* are all able to take an existing object as the second parameter:
 
 	var Person = {
