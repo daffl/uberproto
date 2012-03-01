@@ -162,9 +162,6 @@ functionality. *extend*, *mixin* and *proxy* are all able to take an existing ob
 		}
 	};
 
-
-### Mixin
-
 	// Mix in a setName method.
 	Proto.mixin({
 		setName : function(name) {
