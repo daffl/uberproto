@@ -1,39 +1,37 @@
 <!DOCTYPE html> <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">      <title>UberProto</title>   <style>     body {       font-size: 16px;       line-height: 24px;       background: #fff url("bg.png");       color: #252519;       font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif;       padding: 0 0 50px 50px;     }     div.container {       width: 720px;       margin: 50px 0 50px 50px;     }     p {       width: 550px;     }       #documentation p {         margin-bottom: 4px;       }     a, a:visited {       padding: 0 2px;       text-decoration: none;       background: #dbe6f3;       color: #3f6fa5;     }     a:active, a:hover {       color: #dbe6f3;       background: #3f6fa5;     }     h1, h2, h3, h4, h5, h6 {       margin-top: 40px;       width: 550px;       line-height: 1.25em;     }     b.header {       font-size: 18px;     }     span.alias {       font-size: 14px;       font-style: italic;       margin-left: 20px;     }     table, tr, td {       margin: 0; padding: 0;     }       td {         padding: 2px 12px 2px 0;       }     ul {       list-style-type: circle;       padding: 0 0 0 20px;     }       li {         width: 500px;         margin-bottom: 10px;       }     code, pre, tt {       font-family: Monaco, Consolas, "Lucida Console", monospace;       font-size: 12px;       line-height: 18px;       color: #555529;     }       pre {         font-size: 12px;         padding: 2px 0 2px 12px;         border-left: 6px solid #aaaa99;         margin: 0px 0 30px;       }            #ribbon {      line-height: 0;     }          #ribbon:hover {      background: none;     }          #ribbon img {      position: fixed;      top: 0;      right: 0;      border: 0;      z-index: 2;     }   </style> </head> <body>      <a id="ribbon" href="https://github.com/daffl/uberproto">    <img src="https://a248.e.akamai.net/assets.github.com/img/71eeaab9d563c2b3c590319b398dd35683265e85/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67"      alt="Fork me on GitHub"></a>      <h1>UberProto</h1>        <em>JavaScript object inheritance sugar</em>         <p>Uberproto is a simple base object that adds some sugar to ECMAScript 5 style object inheritance
-in JavaScript.</p>
+	in JavaScript.</p>
 
 <p>Here is what it can do in a nutshell:</p>
 
 <ul>
-<li>Easily extend objects</li>
-<li>Initialization methods</li>
-<li>Super methods</li>
-<li>Mixins</li>
-<li>Method proxies</li>
+	<li>Easily extend objects</li>
+	<li>Initialization methods</li>
+	<li>Super methods</li>
+	<li>Mixins</li>
+	<li>Method proxies</li>
 </ul>
 
 <p>With a small footprint (0.8Kb minified and 0.4Kb compressed) and an easy to handle
-API of just four methods it also doesn't add a lot of baggage to your JavaScript application.</p>
+	API of just four methods it also doesn't add a lot of baggage to your JavaScript application.</p>
 
 <h2>Usage</h2>
 
 <p>UberProto can be used as a <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">CommonJS AMD</a> module
-(e.g. with <a href="http://requirejs.org/">RequireJS</a>), <a href="http://nodejs.org">NodeJS</a> or directly
-in the browser. If no module loader is available, the global variable <em>Proto</em>
-will be defined after you include the script.
-To be compatible with all browsers, you also need the <a href="https://github.com/kriskowal/es5-shim">ES5-shim</a>.</p>
+	(e.g. with <a href="http://requirejs.org/">RequireJS</a>), <a href="http://nodejs.org">NodeJS</a> or directly
+	in the browser. If no module loader is available, the global variable <em>Proto</em>
+	will be defined after you include the script.</p>
 
 <h3>Using AMD (e.g. RequireJS)</h3>
 
 <p>Make sure proto.js is in the right folder and then just define a module like this:</p>
 
 <pre><code>define(['proto'], function(Proto) {
-    // Source goes here
-});</code></pre>
+	// Source goes here
+	});</code></pre>
 
-<h3>Straight in the browser</h3>
+<h3>In the browser</h3>
 
-<pre><code>&lt;script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/1.2.4/es5-shim.min.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="proto.min.js"&gt;&lt;/script&gt;</code></pre>
+<pre><code>&lt;script type="text/javascript" src="proto.min.js"&gt;&lt;/script&gt;</code></pre>
 
 <p>Now <em>Proto</em> is available as a global vairable.</p>
 
@@ -42,7 +40,7 @@ To be compatible with all browsers, you also need the <a href="https://github.co
 <p>After installing the package using NPM</p>
 
 <blockquote>
-  <p>npm install uberproto</p>
+	<p>npm install uberproto</p>
 </blockquote>
 
 <p>just require it like any other module:</p>
@@ -53,160 +51,144 @@ To be compatible with all browsers, you also need the <a href="https://github.co
 
 <h3>Extend</h3>
 
-<p>You can extend any UberProto object by using <em>extend</em> to create a
-new object that inherits from the current one. Internally Object.create is
-being used and the prototype is set to the object that you are extending.
-If defined, the <em>init</em> method will be used as the constructor.
-That way you can define a simple Person object (which will be reused
-throughout the next paragraphs):</p>
+<p>You can extend any UberProto object by using <em>extend</em> to create a new object that inherits from the current one.
+	Internally <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/create">Object.create</a> is
+	being used (the library provides a polyfill for browsers that don't support Object.create)
+	and the prototype is set to the object that you are extending.
+	If defined, the <em>init</em> method will be used as the constructor.
+	That way you can define a simple Person object (which will be reused throughout the next paragraphs):</p>
 
 <pre><code>var Person = Proto.extend({
-    init : function(name)
-    {
-        this.name = name;
-    },
+	init : function(name) {
+	this.name = name;
+	},
 
-    fullName : function()
-    {
-        return this.name;
-    }
-});</code></pre>
+	fullName : function() {
+	return this.name;
+	}
+	});</code></pre>
+
+<p>You can also define a plain object and pass it to UberProto object methods:</p>
+
+<pre><code>var PersonObject = {
+	init : function(name) {
+	this.name = name;
+	},
+
+	fullName : function() {
+	return this.name;
+	}
+	};</code></pre>
 
 <h3>Initialize</h3>
 
-<p>You can create a new instance by calling <em>create</em>:    </p>
+<p>You can create a new instance by calling <em>create</em>:</p>
 
 <pre><code>var dave = Person.create('Dave');
-console.log(dave.name); // -&gt; 'Dave'
-console.log(dave.fullName()); // -&gt; 'Dave'</code></pre>
+	console.log(dave.name); // -&gt; 'Dave'
+	console.log(dave.fullName()); // -&gt; 'Dave'</code></pre>
 
-<p>Overwriting <em>create</em> is great if you want to customize the way objects are being
-instantiated.</p>
+<p>For calling the constructor on a plain object, call <em>create</em> on an UberProto object:</p>
+
+<pre><code>var john = Proto.create.call(PersonObject, 'John');
+	console.log(john.fullName()); // -&gt; 'John'</code></pre>
+
+<p>Overwriting <em>create</em> is great if you want to customize the way new objects are being
+	instantiated.</p>
 
 <h3>Super methods</h3>
 
-<p>In each method <em>this._super</em> refers to the method being overwritten,
-if there is one. For our Person object, for example, it would be a lot better
-if it also had a last name:</p>
+<p>In each method <code>this.\_super</code> refers to the method being overwritten, if there is one.
+	For our Person object, for example, it would be a lot better if it also had a last name:</p>
 
 <pre><code>var BetterPerson = Person.extend({
-    init : function(name, lastname)
-    {
-        // If you want to pass all original arguments to the
-        // _super method just use apply:
-        // this._super.apply(this, arguments);
+	init : function(name, lastname) {
+	// If you want to pass all original arguments to the
+	// _super method just use apply:
+	// this._super.apply(this, arguments);
 
-        this._super(name);
-        this.lastname = lastname;
-    },
+	this._super(name);
+	this.lastname = lastname;
+	},
 
-    fullName : function()
-    {
-        return this._super() + ' ' + this.lastname;
-    }
-});
+	fullName : function() {
+	return this._super() + ' ' + this.lastname;
+	}
+	});
 
-var dave = BetterPerson.create('Dave', 'Doe');
-console.log(dave.name); // -&gt; 'Dave'
-console.log(dave.lastname); // -&gt; 'Doe'
-console.log(dave.fullName()); // -&gt; 'Dave Doe'</code></pre>
+	var dave = BetterPerson.create('Dave', 'Doe');
+	console.log(dave.name); // -&gt; 'Dave'
+	console.log(dave.lastname); // -&gt; 'Doe'
+	console.log(dave.fullName()); // -&gt; 'Dave Doe'</code></pre>
+
+<p>You can also extend a plain object if you don't want to inherit from an UberProto object:</p>
+
+<pre><code>var BetterPersonObject = Proto.extend({
+	init : function(name, lastname) {
+	this._super(name);
+	this.lastname = lastname;
+	},
+
+	fullName : function() {
+	return this._super() + ' ' + this.lastname;
+	}
+	}, PersonObject); // Pass the plain object as the second parameter</code></pre>
 
 <h3>Mixins</h3>
 
-<p>Mixins add functionality to an existing object. Mixins can also
-access their super methods using <em>this._super</em>. This will either refer
-the overwritten method on the object itself or the one on the prototype:</p>
+<p>Mixins add functionality to an existing object. Mixins can also access their super methods using <code>this.\_super</code>.
+	This will either refer the overwritten method on the object itself or the one on the prototype:</p>
 
 <pre><code>Person.mixin({
-    init : function()
-    {
-        this._super.apply(this, arguments);
-        this.can_sing = true;
-    },
+	init : function()
+	{
+	this._super.apply(this, arguments);
+	this.can_sing = true;
+	},
 
-    sing : function()
-    {
-        return 'Laaaa';
-    }
-});
+	sing : function()
+	{
+	return 'Laaaa';
+	}
+	});
 
-var dude = Person.create('Dude');
-console.log(dude.sing()); // -&gt; 'Laaaa'
-console.log(dude.can_sing); // -&gt; true</code></pre>
+	var dude = Person.create('Dude');
+	console.log(dude.sing()); // -&gt; 'Laaaa'
+	console.log(dude.can_sing); // -&gt; true</code></pre>
 
 <p>Actual instances can be mixed in just the same:</p>
 
 <pre><code>var operaSinger = Person.create('Pavarotti');
-operaSinger.mixin({
-    sing : function()
-    {
-        return this._super() + ' Laalaaa!';
-    }
-});
+	operaSinger.mixin({
+	sing : function()
+	{
+	return this._super() + ' Laalaaa!';
+	}
+	});
 
-console.log(operaSinger.sing()); // -&gt; 'Laaaa Laalaaa!</code></pre>
+	console.log(operaSinger.sing()); // -&gt; 'Laaaa Laalaaa!</code></pre>
+
+<p>And you can also mix into plain objects e.g. overwriting the constructor of PersonObject:</p>
+
+<pre><code>Proto.mixin({
+	fullName : function() {
+	return 'My name is: ' + this._super();
+	}
+	}, PersonObject);
+
+	// Create a plain object without calling the constructor
+	var instance = Object.create(PersonObject);
+	instance.name = 'Dude';
+	console.log(instance.fullName()); // 'My name is: Dude'</code></pre>
 
 <h3>Method proxy</h3>
 
 <p>You can create proxy callbacks, that make sure that <em>this</em> will always
-point to the right object:</p>
+	point to the right object:</p>
 
 <pre><code>var callback = operaSinger.proxy('fullName');
-console.log(callback()); // -&gt; 'Pavarotti'</code></pre>
+	console.log(callback()); // -&gt; 'Pavarotti'</code></pre>
 
-<h2>Extending existing objects</h2>
+<p>And of course proxy methods of plain objects:</p>
 
-<p>Although it is the default functionality, you don't have to inherit from the UberProto base object to use its
-functionality. <em>extend</em>, <em>mixin</em> and <em>proxy</em> are all able to take an existing object as the second parameter:</p>
-
-<pre><code>var Person = {
-    fullName : function()
-    {
-        return this.name;
-    }
-};
-
-// Mix in a setName method.
-Proto.mixin({
-    setName : function(name) {
-        this.name = name;
-    }
-}, Person);
-
-// Create a new Person instance
-var instance = Object.create(Person);
-instance.setName('Dude');
-console.log(instance.fullName()); // -&gt; Dude
-
-// Create a proxy
-var callback = Proto.proxy('fullName', instance);
-console.log(callback()); // -&gt; Dude
-
-// Extend Person and return the extended object
-// _super works as usual for extend and mixin
-var Extended = Proto.extend({
-    fullName : function()
-    {
-        return this.lastname + " " + this._super();
-    },
-
-    setName : function(name, lastname)
-    {
-        this._super(name);
-        this.lastname = lastname;
-    }
-}, Person);
-
-var extendedInstance = Object.create(Extended);
-extendedInstance.setName('Dude', 'The');
-console.log(extendedInstance.fullName()); // -&gt; The Dude</code></pre>
-
-<p>To use the <em>init</em> constructor method you can simply call <em>create</em>:</p>
-
-<pre><code>var Person = {
-    init : function(name) {
-        this.name = name;
-    }
-}
-
-var instance = Proto.create.call(Person, 'Dude');</code></pre> </body> </html>
+<pre><code>var cb = Proto.proxy('fullName', PersonObject);</code></pre> </body> </html>
