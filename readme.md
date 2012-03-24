@@ -9,8 +9,8 @@ Here is what it can do in a nutshell:
 - Mixins
 - Method proxies
 
-With a small footprint (0.8Kb minified and 0.4Kb compressed) and an easy to handle
-API of just four methods it also doesn't add a lot of baggage to your JavaScript application.
+With a small footprint (about 1Kb minified) and an easy to handle API of just
+four methods it also doesn't add a lot of baggage to your JavaScript application.
 
 ## Usage
 
@@ -28,6 +28,9 @@ Make sure proto.js is in the right folder and then just define a module like thi
 	});
 
 ### In the browser
+
+[Download proto.min.js](https://raw.github.com/daffl/uberproto/master/proto.min.js)
+(1Kb minified) and include it as a script:
 
 	<script type="text/javascript" src="proto.min.js"></script>
 
@@ -75,6 +78,8 @@ You can also define a plain object and pass it to UberProto object methods:
 			return this.name;
 		}
 	};
+
+Play around with the examples in [this JSFiddle](http://jsfiddle.net/Daff/2GB8n/1/).
 
 ### Initialize
 
