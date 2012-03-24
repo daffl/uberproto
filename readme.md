@@ -83,7 +83,8 @@ Play around with the examples in [this JSFiddle](http://jsfiddle.net/Daff/2GB8n/
 
 ### Initialize
 
-You can create a new instance by calling *create*:
+You can create a new instance by calling *create*. This will create a new object and call the *init* method,
+if defined:
 
 	var dave = Person.create('Dave');
 	console.log(dave.name); // -> 'Dave'
@@ -99,7 +100,7 @@ instantiated.
 
 ### Super methods
 	
-In each method `this.\_super` refers to the method being overwritten, if there is one.
+In each method `this._super` refers to the method being overwritten, if there is one.
 For our Person object, for example, it would be a lot better if it also had a last name:
 
 	var BetterPerson = Person.extend({
@@ -137,7 +138,7 @@ You can also extend a plain object if you don't want to inherit from an UberProt
 
 ### Mixins
 
-Mixins add functionality to an existing object. Mixins can also access their super methods using `this.\_super`.
+Mixins add functionality to an existing object. Mixins can also access their super methods using `this._super`.
 This will either refer the overwritten method on the object itself or the one on the prototype:
 
 	Person.mixin({
