@@ -1,6 +1,6 @@
 {
 	"title": "UberProto",
-	"content_file": "readme.markdown",
+	"content_file": "readme.md",
 	"include_index": false,
 	"header": "UberProto",
 	"subheader": "JavaScript object inheritance sugar",
