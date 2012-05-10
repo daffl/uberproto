@@ -90,6 +90,17 @@ if defined:
 	console.log(dave.name); // -> 'Dave'
 	console.log(dave.fullName()); // -> 'Dave'
 
+If you are using *init* already for something else you can also set the *__init* property to the method name
+of your intialization method:
+
+	var MyPerson = Proto.extend({
+		__init : 'construct',
+
+		construct : function(name) {
+			this.name = name;
+		}
+	};
+
 For calling the constructor on a plain object, call *create* on an UberProto object:
 
 	var john = Proto.create.call(PersonObject, 'John');
@@ -194,3 +205,17 @@ point to the right object:
 And of course proxy methods of plain objects:
 
 	var cb = Proto.proxy('fullName', PersonObject);
+
+## Changelog
+
+__1.0.2__
+
+* Added `__init` property to allow constructor functions to be named other than *init*. Fixes issue [#1](https://github.com/daffl/uberproto/pull/1)
+
+__1.0.1__
+
+* API now usable with plain objects like `Proto.mixin({}, PlainObject)`
+
+__1.0.0__
+
+* Initial stable release

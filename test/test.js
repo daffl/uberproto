@@ -16,6 +16,7 @@ this.suite = {
 		test.equal(Extended.create().sayHi(), "hi", "Said hi");
 		test.done();
 	},
+
 	create : function(test) {
 		test.expect(5);
 		
@@ -37,6 +38,26 @@ this.suite = {
 		test.equal(inst.sayHi(), 'Hi Tester', 'Said hi with name');
 		test.ok(Proto.isPrototypeOf(Obj), 'Should have prototype of Proto');
 		test.ok(Obj.isPrototypeOf(inst), 'Instance should have prototype of Obj');
+		test.done();
+	},
+
+	initAlias : function(test) {
+		test.expect(2);
+		var Obj = Proto.extend({
+				__init : 'myConstructor',
+				myConstructor : function(arg) {
+					test.equal(arg, 'myConstructor', 'Got proper arguments in myConstructor');
+				}
+			}),
+			OtherObj = {
+				__init : 'testConstructor',
+				testConstructor : function(arg) {
+					test.equal(arg, 'testConstructor', 'Got proper arguments in myConstructor');
+				}
+			}
+
+		Obj.create('myConstructor');
+		Proto.create.call(OtherObj, 'testConstructor');
 		test.done();
 	},
 
