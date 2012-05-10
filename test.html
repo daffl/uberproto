@@ -16,6 +16,7 @@
     <span class="nx">test</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">Extended</span><span class="p">.</span><span class="nx">create</span><span class="p">().</span><span class="nx">sayHi</span><span class="p">(),</span> <span class="s2">&quot;hi&quot;</span><span class="p">,</span> <span class="s2">&quot;Said hi&quot;</span><span class="p">);</span>
     <span class="nx">test</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span>
   <span class="p">},</span>
+
   <span class="nx">create</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">test</span><span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
     
@@ -37,6 +38,26 @@
     <span class="nx">test</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">inst</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">(),</span> <span class="s1">&#39;Hi Tester&#39;</span><span class="p">,</span> <span class="s1">&#39;Said hi with name&#39;</span><span class="p">);</span>
     <span class="nx">test</span><span class="p">.</span><span class="nx">ok</span><span class="p">(</span><span class="nx">Proto</span><span class="p">.</span><span class="nx">isPrototypeOf</span><span class="p">(</span><span class="nx">Obj</span><span class="p">),</span> <span class="s1">&#39;Should have prototype of Proto&#39;</span><span class="p">);</span>
     <span class="nx">test</span><span class="p">.</span><span class="nx">ok</span><span class="p">(</span><span class="nx">Obj</span><span class="p">.</span><span class="nx">isPrototypeOf</span><span class="p">(</span><span class="nx">inst</span><span class="p">),</span> <span class="s1">&#39;Instance should have prototype of Obj&#39;</span><span class="p">);</span>
+    <span class="nx">test</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span>
+  <span class="p">},</span>
+
+  <span class="nx">initAlias</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">test</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">test</span><span class="p">.</span><span class="nx">expect</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">Obj</span> <span class="o">=</span> <span class="nx">Proto</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+        <span class="nx">__init</span> <span class="o">:</span> <span class="s1">&#39;myConstructor&#39;</span><span class="p">,</span>
+        <span class="nx">myConstructor</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">test</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">arg</span><span class="p">,</span> <span class="s1">&#39;myConstructor&#39;</span><span class="p">,</span> <span class="s1">&#39;Got proper arguments in myConstructor&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}),</span>
+      <span class="nx">OtherObj</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">__init</span> <span class="o">:</span> <span class="s1">&#39;testConstructor&#39;</span><span class="p">,</span>
+        <span class="nx">testConstructor</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">test</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">arg</span><span class="p">,</span> <span class="s1">&#39;testConstructor&#39;</span><span class="p">,</span> <span class="s1">&#39;Got proper arguments in myConstructor&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+    <span class="nx">Obj</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;myConstructor&#39;</span><span class="p">);</span>
+    <span class="nx">Proto</span><span class="p">.</span><span class="nx">create</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">OtherObj</span><span class="p">,</span> <span class="s1">&#39;testConstructor&#39;</span><span class="p">);</span>
     <span class="nx">test</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span>
   <span class="p">},</span>
 

@@ -94,6 +94,17 @@ if defined:</p>
 console.log(dave.name); // -&gt; 'Dave'
 console.log(dave.fullName()); // -&gt; 'Dave'</code></pre>
 
+<p>If you are using <em>init</em> already for something else you can also set the <em>__init</em> property to the method name
+of your intialization method:</p>
+
+<pre><code>var MyPerson = Proto.extend({
+    __init : 'construct',
+
+    construct : function(name) {
+        this.name = name;
+    }
+};</code></pre>
+
 <p>For calling the constructor on a plain object, call <em>create</em> on an UberProto object:</p>
 
 <pre><code>var john = Proto.create.call(PersonObject, 'John');
@@ -197,4 +208,24 @@ console.log(callback()); // -&gt; 'Pavarotti'</code></pre>
 
 <p>And of course proxy methods of plain objects:</p>
 
-<pre><code>var cb = Proto.proxy('fullName', PersonObject);</code></pre> </body> </html>
+<pre><code>var cb = Proto.proxy('fullName', PersonObject);</code></pre>
+
+<h2>Changelog</h2>
+
+<p><strong>1.0.2</strong></p>
+
+<ul>
+<li>Added <code>__init</code> property to allow constructor functions to be named other than <em>init</em>. Fixes issue <a href="https://github.com/daffl/uberproto/pull/1">#1</a></li>
+</ul>
+
+<p><strong>1.0.1</strong></p>
+
+<ul>
+<li>API now usable with plain objects like <code>Proto.mixin({}, PlainObject)</code></li>
+</ul>
+
+<p><strong>1.0.0</strong></p>
+
+<ul>
+<li>Initial stable release</li>
+</ul> </body> </html>
