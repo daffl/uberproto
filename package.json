@@ -1,21 +1,30 @@
 {
-  "name": "uberproto",
-  "description": "JavaScript object inheritance sugar: Easy extension, mixins, super methods, proxies",
-  "version": "1.0.3",
-  "homepage": "http://daffl.github.com/uberproto",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/daffl/uberproto.git"
+  "name" : "uberproto",
+  "description" : "JavaScript object inheritance sugar: Easy extension, mixins, super methods, proxies",
+  "version" : "1.0.3",
+  "homepage" : "http://daffl.github.com/uberproto",
+  "repository" : {
+    "type" : "git",
+    "url" : "git://github.com/daffl/uberproto.git"
   },
-  "author": "David Luecke <daff@neyeon.com> (http://neyeon.com)",
-  "main": "lib/proto",
-  "directories": {
-    "lib": "lib"
+  "author" : "David Luecke <daff@neyeon.com> (http://neyeon.com)",
+  "main" : "lib/proto",
+  "directories" : {
+    "lib" : "lib"
   },
-  "scripts": {
-    "test": "nodeunit test"
+  "scripts" : {
+    "test" : "nodeunit test"
   },
-  "engines": {
-    "node": "*"
+  "licenses" : [
+    {
+      "type" : "MIT",
+      "url" : "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "devDependencies" : {
+    "nodeunit" : ">= 0.7.0"
+  },
+  "engines" : {
+    "node" : "*"
   }
 }
