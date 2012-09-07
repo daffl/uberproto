@@ -101,7 +101,7 @@ of your intialization method:
 		construct : function(name) {
 			this.name = name;
 		}
-	};
+	});
 
 For calling the constructor on a plain object, call *create* on an UberProto object:
 
