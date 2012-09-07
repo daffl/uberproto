@@ -210,6 +210,12 @@ And of course proxy methods of plain objects:
 
 ## Changelog
 
+__1.0.3__
+
+* Added `Object.getPrototypeOf` shim
+* Updated documentation
+* Added Travis CI
+
 __1.0.2__
 
 * Added `__init` property to allow constructor functions to be named other than *init*. Fixes issue [#1](https://github.com/daffl/uberproto/pull/1)
