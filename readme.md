@@ -19,7 +19,9 @@ four methods it also doesn't add a lot of baggage to your JavaScript application
 UberProto can be used as a [CommonJS AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module
 (e.g. with [RequireJS](http://requirejs.org/)), [NodeJS](http://nodejs.org) or directly
 in the browser. If no module loader is available, the global variable _Proto_
-will be defined after you include the script.
+will be defined after you include the script. In the browser you have two options:
+The default build that includes EcmaScript 5 shims or, if you only support modern browsers or
+provide the shims already, without.
 
 ### Using AMD (e.g. RequireJS)
 
@@ -33,8 +35,10 @@ define(['proto'], function(Proto) {
 
 ### In the browser
 
-[Download proto.min.js](https://raw.github.com/daffl/uberproto/master/proto.min.js)
-(1Kb minified) and include it as a script:
+[Download proto.min.js](https://raw.github.com/daffl/uberproto/master/dist/proto.min.js) or
+the EcmaScript 5 version [proto.es5.min.js](https://raw.github.com/daffl/uberproto/master/dist/proto.es5.min.js).
+You can also `bower install uberproto` if you are using [Bower](http://twitter.github.com/bower/)
+as your package manager. Then simply include the file as a script:
 
 ```html
 <script type="text/javascript" src="proto.min.js"></script>
@@ -203,7 +207,7 @@ operaSinger.mixin({
 	}
 });
 
-console.log(operaSinger.sing()); // -> 'Laaaa Laalaaa!
+console.log(operaSinger.sing()); // -> 'Laaaa Laalaaa!'
 ```
 
 And you can also mix into plain objects e.g. overwriting the constructor of PersonObject:
@@ -231,11 +235,22 @@ var callback = operaSinger.proxy('fullName');
 console.log(callback()); // -> 'Pavarotti'
 ```
 
-And of course proxy methods of plain objects:
+And you can partially apply function arguments:
 
 ```javascript
-var cb = Proto.proxy('fullName', PersonObject);
+operaSinger.mixin({
+	sing : function(text)
+	{
+		return this._super() + ' ' + text;
+	}
+});
+
+var singHello = operaSinger.proxy('sing', 'Helloooooo!');
+
+singHello() // Laaaa Laalaaa! Helloooooo!
 ```
+
+`proxy` only works on objects extended from UberProto.
 
 ## Changelog
 
@@ -243,8 +258,9 @@ __1.1.0__
 
 * Extract ES5 shims (build shim-less version)
 * Use Function.bind for proxy
-* Switched test suite to [Mocha]()
-* Use GruntJS
+* Switched test suite to [Mocha](http://visionmedia.github.com/mocha/)
+* [GruntJS](http://gruntjs.com/) build
+* [Bower](http://twitter.github.com/bower/) component: `bower install uberproto`
 
 __1.0.3__
 

@@ -22,7 +22,7 @@ module.exports = function (grunt) {
 			},
 			es5: {
 				src: ['lib/proto.js'],
-				dest: 'proto.es5.js'
+				dest: 'dist/proto.es5.js'
 			}
 		},
 		uglify: {
