@@ -1,0 +1,9 @@
+{
+	"name": "uberproto",
+	"version": "1.1.0",
+	"main": "./proto.min.js",
+	"devDependencies": {
+		"mocha": "~ 1.8.0",
+		"assert": "0.0.1"
+	}
+}
