@@ -1,6 +1,6 @@
-/*! uberproto - v1.1.0 - 2013-03-21
+/*! uberproto - v1.1.0 - 2014-01-23
 * http://daffl.github.com/uberproto
-* Copyright (c) 2013 ; Licensed MIT */
+* Copyright (c) 2014 ; Licensed MIT */
 (function () {
 	Object.create = Object.create || function (o) {
 		if (arguments.length > 1) {
@@ -82,7 +82,7 @@
 			 */
 			mixin: function (prop, obj) {
 				var self = obj || this,
-					fnTest = /xyz/.test(function () {}) ? /\b_super\b/ : /.*/,
+					fnTest = /\b_super\b/,
 					_super = Object.getPrototypeOf(self) || self.prototype,
 					_old;
 

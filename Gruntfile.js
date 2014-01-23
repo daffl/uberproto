@@ -44,35 +44,30 @@ module.exports = function (grunt) {
 		},
 		jshint: {
 			options: {
-				curly: true,
-				eqeqeq: true,
-				immed: true,
-				latedef: true,
-				newcap: true,
-				noarg: true,
-				sub: true,
-				undef: true,
-				unused: true,
-				boss: true,
-				eqnull: true,
-				globals: {},
-				loopfunc: true
+				jshintrc: '.jshintrc'
 			},
 			gruntfile: {
 				src: 'Gruntfile.js'
 			},
-			lib_test: {
+			lib: {
 				src: ['lib/**/*.js', 'test/**/*.js']
 			}
-		}
+		},
+		simplemocha: {
+			lib: ['test/**/*.js']
+		},
+		release: {}
 	});
 
 	// These plugins provide necessary tasks.
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-simple-mocha');
+	grunt.loadNpmTasks('grunt-release');
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+	grunt.registerTask('test', ['jshint', 'simplemocha']);
+	grunt.registerTask('default', ['test', 'concat', 'uglify']);
 
 };
