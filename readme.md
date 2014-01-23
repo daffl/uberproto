@@ -254,6 +254,12 @@ singHello() // Laaaa Laalaaa! Helloooooo!
 
 ## Changelog
 
+__1.1.1__
+
+* Updating component and bower ([#6](https://github.com/daffl/uberproto/pull/6))
+* Only wrap functions that are actually calling ._super ([#7](https://github.com/daffl/uberproto/pull/7))
+* Improved build and tests
+
 __1.1.0__
 
 * Extract ES5 shims (build shim-less version)
