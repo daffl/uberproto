@@ -74,7 +74,7 @@ var Person = Proto.extend({
 	init : function(name) {
 		this.name = name;
 	},
-	
+
 	fullName : function() {
 		return this.name;
 	}
@@ -132,7 +132,7 @@ Overwriting *create* is great if you want to customize the way new objects are b
 instantiated.
 
 ### Super methods
-	
+
 In each method `this._super` refers to the method being overwritten, if there is one.
 For our Person object, for example, it would be a lot better if it also had a last name:
 
@@ -141,11 +141,11 @@ var BetterPerson = Person.extend({
 	init : function(name, lastname) {
 		// If you want to pass all original arguments to the
 		// _super method just use apply:
-		// this._super.apply(this, arguments);		
+		// this._super.apply(this, arguments);
 		this._super(name);
 		this.lastname = lastname;
 	},
-	
+
 	fullName : function() {
 		return this._super() + ' ' + this.lastname;
 	}
@@ -184,7 +184,7 @@ Person.mixin({
 		this._super.apply(this, arguments);
 		this.can_sing = true;
 	},
-	
+
 	sing : function()
 	{
 		return 'Laaaa';
@@ -230,7 +230,7 @@ console.log(instance.fullName()); // 'My name is: Dude'
 You can create proxy callbacks, that make sure that _this_ will always
 point to the right object:
 
-```javascript	
+```javascript
 var callback = operaSinger.proxy('fullName');
 console.log(callback()); // -> 'Pavarotti'
 ```
@@ -253,6 +253,10 @@ singHello() // Laaaa Laalaaa! Helloooooo!
 `proxy` only works on objects extended from UberProto.
 
 ## Changelog
+
+__1.1.2__
+
+* Changed to proper Universal Module Definition ([#9](https://github.com/daffl/uberproto/pull/9))
 
 __1.1.1__
 
