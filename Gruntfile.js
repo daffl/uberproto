@@ -46,11 +46,8 @@ module.exports = function (grunt) {
 			options: {
 				jshintrc: '.jshintrc'
 			},
-			gruntfile: {
-				src: 'Gruntfile.js'
-			},
 			lib: {
-				src: ['lib/**/*.js', 'test/**/*.js']
+				src: ['Gruntfile.js', 'lib/**/*.js', 'test/**/*.js']
 			}
 		},
 		simplemocha: {
