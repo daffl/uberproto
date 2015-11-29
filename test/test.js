@@ -1,31 +1,31 @@
 /* global describe, it, window, require */
 (function () {
-	var Proto, test;
+	var Proto, assert;
 
 	if (typeof require === 'function') {
 		Proto = require('../lib/proto');
-		test = require('assert');
+		assert = require('assert');
 	} else {
 		Proto = window.Proto;
-		test = window.assert;
+		assert = window.assert;
 	}
 
 	describe('UberProto', function () {
 		it('extends objects', function () {
 			var Extended = Proto.extend({
 				sayHi: function () {
-					test.ok(true, 'sayHi called');
+					assert.ok(true, 'sayHi called');
 					return 'hi';
 				}
 			});
 
-			test.equal(Extended.create().sayHi(), "hi", "Said hi");
+			assert.equal(Extended.create().sayHi(), 'hi', 'Said hi');
 		});
 
 		it('creates a new object', function () {
 			var Obj = Proto.extend({
 				init: function (name) {
-					test.ok(true, 'Init called');
+					assert.ok(true, 'Init called');
 					this.name = name;
 				},
 
@@ -37,24 +37,24 @@
 			});
 
 			var inst = Obj.create('Tester');
-			test.equal(inst.name, 'Tester', 'Name set');
-			test.equal(inst.prop, 'Testing', 'Prototype property still there');
-			test.equal(inst.sayHi(), 'Hi Tester', 'Said hi with name');
-			test.ok(Proto.isPrototypeOf(Obj), 'Should have prototype of Proto');
-			test.ok(Obj.isPrototypeOf(inst), 'Instance should have prototype of Obj');
+			assert.equal(inst.name, 'Tester', 'Name set');
+			assert.equal(inst.prop, 'Testing', 'Prototype property still there');
+			assert.equal(inst.sayHi(), 'Hi Tester', 'Said hi with name');
+			assert.ok(Proto.isPrototypeOf(Obj), 'Should have prototype of Proto');
+			assert.ok(Obj.isPrototypeOf(inst), 'Instance should have prototype of Obj');
 		});
 
 		it('uses an init method alias', function () {
 			var Obj = Proto.extend({
 					__init: 'myConstructor',
 					myConstructor: function (arg) {
-						test.equal(arg, 'myConstructor', 'Got proper arguments in myConstructor');
+						assert.equal(arg, 'myConstructor', 'Got proper arguments in myConstructor');
 					}
 				}),
 				OtherObj = {
 					__init: 'testConstructor',
 					testConstructor: function (arg) {
-						test.equal(arg, 'testConstructor', 'Got proper arguments in myConstructor');
+						assert.equal(arg, 'testConstructor', 'Got proper arguments in myConstructor');
 					}
 				};
 
@@ -65,24 +65,24 @@
 		it('uses _super', function () {
 			var Obj = Proto.extend({
 				init: function (name) {
-					test.ok(true, 'Super init called');
+					assert.ok(true, 'Super init called');
 					this.name = name;
 				}
 			}), Sub = Obj.extend({
 				init: function () {
 					this._super.apply(this, arguments);
-					test.ok(true, 'Sub init called');
+					assert.ok(true, 'Sub init called');
 				}
 			});
 
 			var inst = Sub.create('Tester');
-			test.equal(inst.name, 'Tester', 'Name set in prototype');
+			assert.equal(inst.name, 'Tester', 'Name set in prototype');
 		});
 
 		it('extends an existing object', function () {
 			var Obj = {
 				test: function (name) {
-					test.ok(true, 'Super test method called');
+					assert.ok(true, 'Super test method called');
 					this.name = name;
 				}
 			};
@@ -90,19 +90,19 @@
 			var Extended = Proto.extend({
 				test: function () {
 					this._super.apply(this, arguments);
-					test.ok(true, 'Sub init called');
+					assert.ok(true, 'Sub init called');
 				}
 			}, Obj);
 
 			Extended.test('Tester');
 
-			test.equal(Extended.name, 'Tester', 'Name set in prototype');
+			assert.equal(Extended.name, 'Tester', 'Name set in prototype');
 		});
 
 		it('uses .mixin', function () {
 			var Obj = Proto.extend({
 				init: function (name) {
-					test.ok(true, 'Init called');
+					assert.ok(true, 'Init called');
 					this.name = name;
 				}
 			});
@@ -114,7 +114,7 @@
 			});
 
 			var inst = Obj.create('Tester');
-			test.equal(inst.test(), 'Tester', 'Mixin returned name');
+			assert.equal(inst.test(), 'Tester', 'Mixin returned name');
 
 			Obj.mixin({
 				test: function () {
@@ -122,13 +122,13 @@
 				}
 			});
 
-			test.equal(inst.test(), 'Tester mixed in', 'Mixin called overwritten');
+			assert.equal(inst.test(), 'Tester mixed in', 'Mixin called overwritten');
 		});
 
 		it('.mixin(Object)', function () {
 			var Obj = {
 				test: function (name) {
-					test.ok(true, 'Super test method called');
+					assert.ok(true, 'Super test method called');
 					this.name = name;
 				}
 			};
@@ -136,13 +136,13 @@
 			Proto.mixin({
 				test: function () {
 					this._super.apply(this, arguments);
-					test.ok(true, 'Sub init called');
+					assert.ok(true, 'Sub init called');
 				}
 			}, Obj);
 
 			Obj.test('Tester');
 
-			test.equal(Obj.name, 'Tester', 'Name set in prototype');
+			assert.equal(Obj.name, 'Tester', 'Name set in prototype');
 		});
 
 		it('uses .proxy', function () {
@@ -156,12 +156,73 @@
 				}
 			});
 
-			var inst = Obj.create('Tester'),
-				callback = inst.proxy('test');
-			test.equal(callback('arg'), 'Tester arg', 'Callback set scope properly');
+			var inst = Obj.create('Tester');
+			var callback = inst.proxy('test');
+
+			assert.equal(callback('arg'), 'Tester arg', 'Callback set scope properly');
 
 			callback = inst.proxy('test', 'partialed');
-			test.equal(callback(), 'Tester partialed', 'Callback partially applied');
+			assert.equal(callback(), 'Tester partialed', 'Callback partially applied');
+		});
+
+		describe('Babel transpiled classes (#10)', function() {
+			if (typeof require !== 'function' || typeof Object.defineProperty !== 'function') {
+				return;
+			}
+
+			var classes = require('./class-fixture.es5.js');
+
+			it('works with Babel transpiled classes (#10)', function() {
+				var person = new classes.Person('John');
+
+				assert.equal(person.sayHi(), 'Hi John');
+
+				Proto.mixin({
+					sayHi: function() {
+						return this._super() + '!!';
+					}
+				}, person);
+
+				assert.equal(person.sayHi(), 'Hi John!!');
+
+				var otherPerson = new classes.OtherPerson();
+
+				assert.equal(otherPerson.sayHi(), 'Hi David Luecke');
+
+				Proto.mixin({
+					sayHi: function() {
+						return this._super() + '???';
+					}
+				}, otherPerson);
+
+				assert.equal(otherPerson.sayHi(), 'Hi David Luecke???');
+				assert.ok(otherPerson.test());
+			});
+
+			it('can extend from Babel transpiled classes (#10)', function() {
+				var otherPerson = new classes.OtherPerson();
+
+				assert.equal(otherPerson.sayHi(), 'Hi David Luecke');
+
+				var extended = Proto.extend(otherPerson);
+
+				assert.equal(typeof extended.sayHi, 'function');
+
+				assert.equal(extended.sayHi(), 'Hi David Luecke');
+				assert.ok(extended.test());
+
+				assert.ok(!Object.getOwnPropertyDescriptor(extended, 'sayHi').enumerable);
+				assert.ok(!Object.getOwnPropertyDescriptor(extended, 'test').enumerable);
+				assert.ok(Object.getOwnPropertyDescriptor(extended, 'name').enumerable);
+
+				var extext = extended.extend({
+					sayHi: function() {
+						return this._super() + '!!!';
+					}
+				});
+
+				assert.equal(extext.sayHi(), 'Hi David Luecke!!!');
+			});
 		});
 	});
 })();

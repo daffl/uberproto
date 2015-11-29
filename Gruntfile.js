@@ -47,11 +47,11 @@ module.exports = function (grunt) {
 				jshintrc: '.jshintrc'
 			},
 			lib: {
-				src: ['Gruntfile.js', 'lib/**/*.js', 'test/**/*.js']
+				src: ['Gruntfile.js', 'lib/**/*.js', 'test/test.js']
 			}
 		},
 		simplemocha: {
-			lib: ['test/**/*.js']
+			lib: ['test/test.js']
 		},
 		release: {}
 	});
