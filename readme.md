@@ -254,6 +254,10 @@ singHello() // Laaaa Laalaaa! Helloooooo!
 
 ## Changelog
 
+__1.2.0__
+
+* Use `Object.defineProperty` if available to extend all properties ([#10](https://github.com/daffl/uberproto/issues/10), [#11](https://github.com/daffl/uberproto/pull/11))
+
 __1.1.2__
 
 * Changed to proper Universal Module Definition ([#9](https://github.com/daffl/uberproto/pull/9))

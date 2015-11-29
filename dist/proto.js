@@ -1,4 +1,4 @@
-/*! uberproto - v1.1.2 - 2015-11-29
+/*! uberproto - v1.2.0 - 2015-11-29
 * http://daffl.github.com/uberproto
 * Copyright (c) 2015 ; Licensed MIT */
 (function () {
