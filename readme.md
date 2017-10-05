@@ -272,7 +272,7 @@ __1.1.0__
 
 * Extract ES5 shims (build shim-less version)
 * Use Function.bind for proxy
-* Switched test suite to [Mocha](http://visionmedia.github.com/mocha/)
+* Switched test suite to [Mocha](https://mochajs.org/)
 * [GruntJS](http://gruntjs.com/) build
 * [Bower](http://twitter.github.com/bower/) component: `bower install uberproto`
 
