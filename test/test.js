@@ -22,17 +22,17 @@
 			assert.equal(Extended.create().sayHi(), 'hi', 'Said hi');
 		});
 		it('extends objects with Symbol', function () {
-      var testProp = Symbol('test-it');
+			var testProp = Symbol('test-it');
 			var Extended = Proto.extend({
 				sayHi: function () {
 					assert.ok(true, 'sayHi called');
 					return 'hi';
 				},
-        [testProp]: true
+				[testProp]: true
 			});
 
 			assert.equal(Extended.create().sayHi(), 'hi', 'Said hi');
-      assert.ok(Extended[testProp], 'Symbol prop conserved');
+			assert.ok(Extended[testProp], 'Symbol prop conserved');
 		});
 
 		it('creates a new object', function () {
