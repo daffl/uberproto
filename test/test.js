@@ -21,6 +21,7 @@
 
 			assert.equal(Extended.create().sayHi(), 'hi', 'Said hi');
 		});
+
 		it('extends objects with Symbol', function () {
 			var testProp = Symbol('test-it');
 			var Extended = Proto.extend({
