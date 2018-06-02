@@ -1,6 +1,6 @@
-/*! uberproto - v1.2.0 - 2015-11-29
+/*! uberproto - v1.2.0 - 2018-06-02
 * http://daffl.github.com/uberproto
-* Copyright (c) 2015 ; Licensed MIT */
+* Copyright (c) 2018 ; Licensed MIT */
 /**
  * A base object for ECMAScript 5 style prototypal inheritance.
  *
@@ -81,17 +81,21 @@
 		// Collect all property descriptors
 		do {
 			Object.getOwnPropertyNames(proto).forEach(processProperty);
+      Object.getOwnPropertySymbols(proto).forEach(processProperty);
     } while((proto = Object.getPrototypeOf(proto)) && Object.getPrototypeOf(proto));
-		
-		Object.keys(descriptors).forEach(function(name) {
-			var descriptor = descriptors[name];
 
-			if(typeof descriptor.value === 'function' && fnTest.test(descriptor.value)) {
-				descriptor.value = makeSuper(_super, self[name], name, descriptor.value);
-			}
+		var processDescriptor = function(name) {
+      var descriptor = descriptors[name];
 
-			Object.defineProperty(self, name, descriptor);
-		});
+      if(typeof descriptor.value === 'function' && fnTest.test(descriptor.value)) {
+        descriptor.value = makeSuper(_super, self[name], name, descriptor.value);
+      }
+
+      Object.defineProperty(self, name, descriptor);
+    };
+
+		Object.keys(descriptors).forEach(processDescriptor);
+    Object.getOwnPropertySymbols(descriptors).forEach(processDescriptor);
 
 		return self;
 	}
