@@ -57,7 +57,7 @@
 }(this, function () {
 
 	function makeSuper(_super, old, name, fn) {
-		return function () {
+		var newMethod = function () {
 			var tmp = this._super;
 
 			// Add a new ._super() method that is the same method
@@ -68,10 +68,17 @@
 			// The method only need to be bound temporarily, so we
 			// remove it when we're done executing
 			var ret = fn.apply(this, arguments);
+
 			this._super = tmp;
 
 			return ret;
 		};
+
+		Object.getOwnPropertySymbols(old).forEach(function (name) {
+			newMethod[name] = old[name];
+		});
+
+		return newMethod;
 	}
 
 	function legacyMixin(prop, obj) {
