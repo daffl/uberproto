@@ -22,6 +22,49 @@
 			assert.equal(Extended.create().sayHi(), 'hi', 'Said hi');
 		});
 
+		it('extends objects with Symbol', function () {
+			var testProp = Symbol('test-it');
+			var Extended = Proto.extend({
+				sayHi: function () {
+					assert.ok(true, 'sayHi called');
+					return 'hi';
+				},
+				[testProp]: true
+			});
+
+			assert.equal(Extended.create().sayHi(), 'hi', 'Said hi');
+			assert.ok(Extended[testProp], 'Symbol prop conserved');
+		});
+
+		it('mixin objects with Symbol', function () {
+			var testProp = Symbol('test-it');
+			var Obj = Proto.extend({
+				init: function (name) {
+					assert.ok(true, 'Init called');
+					this.name = name;
+				},
+				test: function () {
+					return this.name;
+				}
+			});
+
+			Obj.test[testProp] = true;
+
+			var inst = Obj.create('Tester');
+
+			assert.ok(inst.test[testProp]);
+
+			Obj.mixin({
+				test: function () {
+					return this._super() + ' mixed in';
+				}
+			});
+
+			assert.equal(inst.test(), 'Tester mixed in');
+			assert.ok(Obj.test[testProp], 'Symbol conserved on method (Obj)');
+			assert.ok(inst.test[testProp], 'Symbol conserved on method (inst)');
+		});
+
 		it('creates a new object', function () {
 			var Obj = Proto.extend({
 				init: function (name) {

@@ -1,6 +1,6 @@
-/*! uberproto - v1.2.0 - 2015-11-29
+/*! uberproto - v1.2.0 - 2018-06-02
 * http://daffl.github.com/uberproto
-* Copyright (c) 2015 ; Licensed MIT */
+* Copyright (c) 2018 ; Licensed MIT */
 /**
  * A base object for ECMAScript 5 style prototypal inheritance.
  *
@@ -19,7 +19,7 @@
 }(this, function () {
 
 	function makeSuper(_super, old, name, fn) {
-		return function () {
+		var newMethod = function () {
 			var tmp = this._super;
 
 			// Add a new ._super() method that is the same method
@@ -30,10 +30,17 @@
 			// The method only need to be bound temporarily, so we
 			// remove it when we're done executing
 			var ret = fn.apply(this, arguments);
+
 			this._super = tmp;
 
 			return ret;
 		};
+
+		Object.getOwnPropertySymbols(old).forEach(function (name) {
+			newMethod[name] = old[name];
+		});
+
+		return newMethod;
 	}
 
 	function legacyMixin(prop, obj) {
@@ -81,9 +88,10 @@
 		// Collect all property descriptors
 		do {
 			Object.getOwnPropertyNames(proto).forEach(processProperty);
+			Object.getOwnPropertySymbols(proto).forEach(processProperty);
     } while((proto = Object.getPrototypeOf(proto)) && Object.getPrototypeOf(proto));
-		
-		Object.keys(descriptors).forEach(function(name) {
+
+		var processDescriptor = function(name) {
 			var descriptor = descriptors[name];
 
 			if(typeof descriptor.value === 'function' && fnTest.test(descriptor.value)) {
@@ -91,7 +99,10 @@
 			}
 
 			Object.defineProperty(self, name, descriptor);
-		});
+		};
+
+		Object.keys(descriptors).forEach(processDescriptor);
+		Object.getOwnPropertySymbols(descriptors).forEach(processDescriptor);
 
 		return self;
 	}
