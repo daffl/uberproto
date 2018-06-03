@@ -1,11 +1,11 @@
 # Change Log
 
-## [Unreleased](https://github.com/daffl/uberproto/tree/HEAD)
-
-[Full Changelog](https://github.com/daffl/uberproto/compare/1.2.0...HEAD)
+## [v2.0.0](https://github.com/daffl/uberproto/tree/v2.0.0) (2018-06-03)
+[Full Changelog](https://github.com/daffl/uberproto/compare/1.2.0...v2.0.0)
 
 **Merged pull requests:**
 
+- Remove non-ES5 legacy code and update repository infrastructure  [\#14](https://github.com/daffl/uberproto/pull/14) ([daffl](https://github.com/daffl))
 - conserve Symbols [\#13](https://github.com/daffl/uberproto/pull/13) ([bertho-zero](https://github.com/bertho-zero))
 - Update Mocha link [\#12](https://github.com/daffl/uberproto/pull/12) ([mortonfox](https://github.com/mortonfox))
 
