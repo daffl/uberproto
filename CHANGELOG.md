@@ -1,5 +1,12 @@
 # Change Log
 
+## [v2.0.1](https://github.com/daffl/uberproto/tree/v2.0.1) (2018-06-03)
+[Full Changelog](https://github.com/daffl/uberproto/compare/v2.0.0...v2.0.1)
+
+**Merged pull requests:**
+
+- Check for function before trying to copy symbols [\#15](https://github.com/daffl/uberproto/pull/15) ([daffl](https://github.com/daffl))
+
 ## [v2.0.0](https://github.com/daffl/uberproto/tree/v2.0.0) (2018-06-03)
 [Full Changelog](https://github.com/daffl/uberproto/compare/1.2.0...v2.0.0)
 
