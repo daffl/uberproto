@@ -48,12 +48,16 @@ describe('UberProto', function () {
     Obj.mixin({
       test: function () {
         return this._super() + ' mixed in';
+      },
+      otherTest: function () {
+        return typeof this._super === 'function';
       }
     });
 
     assert.equal(inst.test(), 'Tester mixed in');
     assert.ok(Obj.test[testProp], 'Symbol conserved on method (Obj)');
     assert.ok(inst.test[testProp], 'Symbol conserved on method (inst)');
+    assert.ok(!inst.otherTest());
   });
 
   it('creates a new object', function () {
