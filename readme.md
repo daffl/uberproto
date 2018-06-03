@@ -20,9 +20,7 @@ With a small footprint (about 1.2Kb minified) and an easy to handle API of just 
 UberProto can be used as a [CommonJS AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) module
 (e.g. with [RequireJS](http://requirejs.org/)), [NodeJS](http://nodejs.org) or directly
 in the browser. If no module loader is available, the global variable _Proto_
-will be defined after you include the script. In the browser you have two options:
-The default build that includes EcmaScript 5 shims or, if you only support modern browsers or
-provide the shims already, without.
+will be defined after you include the script.
 
 ### Using AMD (e.g. RequireJS)
 
@@ -36,13 +34,16 @@ define(['proto'], function(Proto) {
 
 ### In the browser
 
-[Download proto.min.js](https://raw.github.com/daffl/uberproto/master/dist/proto.min.js) or
-the EcmaScript 5 version [proto.es5.min.js](https://raw.github.com/daffl/uberproto/master/dist/proto.es5.min.js).
-You can also `bower install uberproto` if you are using [Bower](http://twitter.github.com/bower/)
-as your package manager. Then simply include the file as a script:
+[Download proto.min.js](https://raw.github.com/daffl/uberproto/master/dist/proto.min.js), then include the file as a script:
 
 ```html
 <script type="text/javascript" src="proto.min.js"></script>
+```
+
+Or through a CDN:
+
+```html
+<script type="text/javascript" src="//unpkg.com/uberproto@2.0.0/dist/proto.min.js"></script>
 ```
 
 Now *Proto* is available as a global vairable.
