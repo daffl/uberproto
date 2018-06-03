@@ -1,23 +1,23 @@
 export class Person {
-  constructor(name) {
+  constructor (name) {
     this.name = name;
   }
 
-  test() {
+  test () {
     return true;
   }
 
-  sayHi() {
+  sayHi () {
     return `Hi ${this.name}`;
   }
 }
 
 export class OtherPerson extends Person {
-  constructor() {
+  constructor () {
     super('David');
   }
 
-  sayHi() {
+  sayHi () {
     return `${super.sayHi()} Luecke`;
   }
 }

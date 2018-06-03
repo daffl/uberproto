@@ -1,7 +1,9 @@
 # Uberproto
 
-Uberproto is a simple base object that adds some sugar to ECMAScript 5 style object inheritance
-in JavaScript.
+[![Build Status](https://travis-ci.org/daffl/uberproto.svg?branch=master)](https://travis-ci.org/daffl/uberproto)
+[![Download Status](https://img.shields.io/npm/dm/@feathersjs/feathers.svg?style=flat-square)](https://www.npmjs.com/package/uberproto)
+
+Uberproto is a simple base object that adds some sugar to ECMAScript 5 style object inheritance in JavaScript.
 
 Here is what it can do in a nutshell:
 
@@ -11,8 +13,7 @@ Here is what it can do in a nutshell:
 - Mixins
 - Method proxies
 
-With a small footprint (about 1Kb minified) and an easy to handle API of just
-four methods it also doesn't add a lot of baggage to your JavaScript application.
+With a small footprint (about 1.2Kb minified) and an easy to handle API of just four methods it also doesn't add a lot of baggage to your JavaScript application.
 
 ## Usage
 
@@ -252,68 +253,8 @@ singHello() // Laaaa Laalaaa! Helloooooo!
 
 `proxy` only works on objects extended from UberProto.
 
-## Changelog
-
-__1.2.0__
-
-* Use `Object.defineProperty` if available to extend all properties ([#10](https://github.com/daffl/uberproto/issues/10), [#11](https://github.com/daffl/uberproto/pull/11))
-
-__1.1.2__
-
-* Changed to proper Universal Module Definition ([#9](https://github.com/daffl/uberproto/pull/9))
-
-__1.1.1__
-
-* Updating component and bower ([#6](https://github.com/daffl/uberproto/pull/6))
-* Only wrap functions that are actually calling ._super ([#7](https://github.com/daffl/uberproto/pull/7))
-* Improved build and tests
-
-__1.1.0__
-
-* Extract ES5 shims (build shim-less version)
-* Use Function.bind for proxy
-* Switched test suite to [Mocha](https://mochajs.org/)
-* [GruntJS](http://gruntjs.com/) build
-* [Bower](http://twitter.github.com/bower/) component: `bower install uberproto`
-
-__1.0.3__
-
-* Added `Object.getPrototypeOf` shim
-* Updated documentation
-* Added Travis CI
-
-__1.0.2__
-
-* Added `__init` property to allow constructor functions to be named other than *init*. Fixes issue [#1](https://github.com/daffl/uberproto/pull/1)
-
-__1.0.1__
-
-* API now usable with plain objects like `Proto.mixin({}, PlainObject)`
-
-__1.0.0__
-
-* Initial stable release
-
 ## License
 
-Copyright (C) 2013 David Luecke daff@neyeon.com
+MIT License
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-[![Build Status](https://secure.travis-ci.org/daffl/uberproto.png)](http://travis-ci.org/daffl/uberproto)
+Copyright (C) 2018 David Luecke daff@neyeon.com
