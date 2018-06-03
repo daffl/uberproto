@@ -13,7 +13,20 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "grunt"
+    "add-dist": "npm run clean && npm run build && git add dist/ --force && git commit -am \"Updating dist\"",
+    "clean": "shx rm -rf dist/ && shx mkdir -p dist",
+    "build": "npm run clean && npm run copy && npm run uglifyjs",
+    "copy": "shx cp lib/proto.js dist/proto.js",
+    "uglifyjs": "uglifyjs lib/proto.js --compress --mangle > dist/proto.min.js",
+    "publish": "git push origin --tags && npm run changelog && git push origin",
+    "changelog": "github_changelog_generator && git add CHANGELOG.md && git commit -am \"Updating changelog\"",
+    "release:patch": "npm run add-dist && npm version patch && npm publish",
+    "release:minor": "npm run add-dist && npm version minor && npm publish",
+    "release:major": "npm run add-dist && npm version major && npm publish",
+    "lint": "semistandard --fix",
+    "mocha": "mocha test/test.js",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha -- test/test.js",
+    "test": "npm run lint && npm run coverage"
   },
   "licenses": [
     {
@@ -21,17 +34,21 @@
       "url": "http://www.opensource.org/licenses/mit-license.php"
     }
   ],
+  "semistandard": {
+    "env": [
+      "mocha"
+    ]
+  },
   "devDependencies": {
-    "mocha": "~ 1.8.0",
-    "grunt": "~ 0.4.0",
-    "grunt-contrib-concat": "*",
-    "grunt-contrib-uglify": "*",
-    "grunt-contrib-jshint": "*",
-    "grunt-release": "~0.6.0",
-    "grunt-simple-mocha": "~0.4.0",
-    "grunt-cli": "~0.1.12"
+    "mocha": "^5.2.0",
+    "semistandard": "^12.0.1",
+    "shx": "^0.2.2",
+    "uglify-js": "^3.4.0"
   },
   "engines": {
     "node": "*"
+  },
+  "dependencies": {
+    "istanbul": "^1.1.0-alpha.1"
   }
 }
