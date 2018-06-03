@@ -18,13 +18,14 @@
   var HAS_SYMBOLS = typeof Object.getOwnPropertySymbols === 'function';
 
   function makeSuper (_super, old, name, fn) {
+    var isFunction = typeof old === 'function';
     var newMethod = function () {
       var tmp = this._super;
 
       // Add a new ._super() method that is the same method
       // but either pointing to the prototype method
       // or to the overwritten method
-      this._super = (typeof old === 'function') ? old : _super[name];
+      this._super = isFunction ? old : _super[name];
 
       // The method only need to be bound temporarily, so we
       // remove it when we're done executing
@@ -35,9 +36,11 @@
       return ret;
     };
 
-    Object.getOwnPropertySymbols(old).forEach(function (name) {
-      newMethod[name] = old[name];
-    });
+    if (isFunction) {
+      Object.getOwnPropertySymbols(old).forEach(function (name) {
+        newMethod[name] = old[name];
+      });
+    }
 
     return newMethod;
   }
