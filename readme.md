@@ -13,7 +13,7 @@ Here is what it can do in a nutshell:
 - Mixins
 - Method proxies
 
-With a small footprint (about 1.2Kb minified) and an easy to handle API of just four methods it also doesn't add a lot of baggage to your JavaScript application.
+With a small footprint (about 0.5Kb minified) and an easy to handle API of just four methods it also doesn't add a lot of baggage to your JavaScript application.
 
 ## Usage
 
