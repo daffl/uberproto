@@ -1,5 +1,12 @@
 # Change Log
 
+## [v2.0.2](https://github.com/daffl/uberproto/tree/v2.0.2) (2018-06-16)
+[Full Changelog](https://github.com/daffl/uberproto/compare/v2.0.1...v2.0.2)
+
+**Merged pull requests:**
+
+- Add missing check for Symbols support [\#16](https://github.com/daffl/uberproto/pull/16) ([daffl](https://github.com/daffl))
+
 ## [v2.0.1](https://github.com/daffl/uberproto/tree/v2.0.1) (2018-06-03)
 [Full Changelog](https://github.com/daffl/uberproto/compare/v2.0.0...v2.0.1)
 
