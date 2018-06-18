@@ -1,5 +1,16 @@
 # Change Log
 
+## [v2.0.3](https://github.com/daffl/uberproto/tree/v2.0.3) (2018-06-18)
+[Full Changelog](https://github.com/daffl/uberproto/compare/v2.0.2...v2.0.3)
+
+**Closed issues:**
+
+- Istanbul Dependency? [\#17](https://github.com/daffl/uberproto/issues/17)
+
+**Merged pull requests:**
+
+- Fix dependencies [\#18](https://github.com/daffl/uberproto/pull/18) ([daffl](https://github.com/daffl))
+
 ## [v2.0.2](https://github.com/daffl/uberproto/tree/v2.0.2) (2018-06-16)
 [Full Changelog](https://github.com/daffl/uberproto/compare/v2.0.1...v2.0.2)
 
