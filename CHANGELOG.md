@@ -1,5 +1,12 @@
 # Change Log
 
+## [v2.0.4](https://github.com/daffl/uberproto/tree/v2.0.4) (2018-08-02)
+[Full Changelog](https://github.com/daffl/uberproto/compare/v2.0.3...v2.0.4)
+
+**Merged pull requests:**
+
+- Do not add undefined property descriptors [\#19](https://github.com/daffl/uberproto/pull/19) ([daffl](https://github.com/daffl))
+
 ## [v2.0.3](https://github.com/daffl/uberproto/tree/v2.0.3) (2018-06-18)
 [Full Changelog](https://github.com/daffl/uberproto/compare/v2.0.2...v2.0.3)
 
