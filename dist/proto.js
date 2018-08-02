@@ -1,7 +1,7 @@
 /* global define */
 /**
  * Uberproto
- * 
+ *
  * A base object for ECMAScript 5 style prototypal inheritance.
  *
  * @see https://github.com/rauschma/proto-js/
@@ -75,8 +75,10 @@
       var descriptors = {};
       var proto = prop;
       var processProperty = function (name) {
-        if (!descriptors[name]) {
-          descriptors[name] = Object.getOwnPropertyDescriptor(proto, name);
+        var descriptor = Object.getOwnPropertyDescriptor(proto, name);
+
+        if (!descriptors[name] && descriptor) {
+          descriptors[name] = descriptor;
         }
       };
 
