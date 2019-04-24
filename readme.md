@@ -1,7 +1,7 @@
 # Uberproto
 
 [![Build Status](https://travis-ci.org/daffl/uberproto.svg?branch=master)](https://travis-ci.org/daffl/uberproto)
-[![Download Status](https://img.shields.io/npm/dm/@feathersjs/feathers.svg?style=flat-square)](https://www.npmjs.com/package/uberproto)
+[![Download Status](https://img.shields.io/npm/dm/@feathersjs/feathers.svg?style=flat-square)](https://www.npmjs.com/package/uberproto) [![Greenkeeper badge](https://badges.greenkeeper.io/daffl/uberproto.svg)](https://greenkeeper.io/)
 
 Uberproto is a simple base object that adds some sugar to ECMAScript 5 style object inheritance in JavaScript.
 

@@ -10,7 +10,7 @@ describe('UberProto', function () {
       }
     });
 
-    assert.equal(Extended.create().sayHi(), 'hi', 'Said hi');
+    assert.strictEqual(Extended.create().sayHi(), 'hi', 'Said hi');
   });
 
   it('extends objects with Symbol', function () {
@@ -23,7 +23,7 @@ describe('UberProto', function () {
       [testProp]: true
     });
 
-    assert.equal(Extended.create().sayHi(), 'hi', 'Said hi');
+    assert.strictEqual(Extended.create().sayHi(), 'hi', 'Said hi');
     assert.ok(Extended[testProp], 'Symbol prop conserved');
   });
 
@@ -54,7 +54,7 @@ describe('UberProto', function () {
       }
     });
 
-    assert.equal(inst.test(), 'Tester mixed in');
+    assert.strictEqual(inst.test(), 'Tester mixed in');
     assert.ok(Obj.test[testProp], 'Symbol conserved on method (Obj)');
     assert.ok(inst.test[testProp], 'Symbol conserved on method (inst)');
     assert.ok(!inst.otherTest());
@@ -75,9 +75,9 @@ describe('UberProto', function () {
     });
 
     var inst = Obj.create('Tester');
-    assert.equal(inst.name, 'Tester', 'Name set');
-    assert.equal(inst.prop, 'Testing', 'Prototype property still there');
-    assert.equal(inst.sayHi(), 'Hi Tester', 'Said hi with name');
+    assert.strictEqual(inst.name, 'Tester', 'Name set');
+    assert.strictEqual(inst.prop, 'Testing', 'Prototype property still there');
+    assert.strictEqual(inst.sayHi(), 'Hi Tester', 'Said hi with name');
     assert.ok(Proto.isPrototypeOf(Obj), 'Should have prototype of Proto');
     assert.ok(Obj.isPrototypeOf(inst), 'Instance should have prototype of Obj');
   });
@@ -86,13 +86,13 @@ describe('UberProto', function () {
     var Obj = Proto.extend({
       __init: 'myConstructor',
       myConstructor: function (arg) {
-        assert.equal(arg, 'myConstructor', 'Got proper arguments in myConstructor');
+        assert.strictEqual(arg, 'myConstructor', 'Got proper arguments in myConstructor');
       }
     });
     var OtherObj = {
       __init: 'testConstructor',
       testConstructor: function (arg) {
-        assert.equal(arg, 'testConstructor', 'Got proper arguments in myConstructor');
+        assert.strictEqual(arg, 'testConstructor', 'Got proper arguments in myConstructor');
       }
     };
 
@@ -115,7 +115,7 @@ describe('UberProto', function () {
     });
 
     var inst = Sub.create('Tester');
-    assert.equal(inst.name, 'Tester', 'Name set in prototype');
+    assert.strictEqual(inst.name, 'Tester', 'Name set in prototype');
   });
 
   it('extends an existing object', function () {
@@ -135,7 +135,7 @@ describe('UberProto', function () {
 
     Extended.test('Tester');
 
-    assert.equal(Extended.name, 'Tester', 'Name set in prototype');
+    assert.strictEqual(Extended.name, 'Tester', 'Name set in prototype');
   });
 
   it('uses .mixin', function () {
@@ -153,7 +153,7 @@ describe('UberProto', function () {
     });
 
     var inst = Obj.create('Tester');
-    assert.equal(inst.test(), 'Tester', 'Mixin returned name');
+    assert.strictEqual(inst.test(), 'Tester', 'Mixin returned name');
 
     Obj.mixin({
       test: function () {
@@ -161,7 +161,7 @@ describe('UberProto', function () {
       }
     });
 
-    assert.equal(inst.test(), 'Tester mixed in', 'Mixin called overwritten');
+    assert.strictEqual(inst.test(), 'Tester mixed in', 'Mixin called overwritten');
   });
 
   it('.mixin(Object)', function () {
@@ -181,7 +181,7 @@ describe('UberProto', function () {
 
     Obj.test('Tester');
 
-    assert.equal(Obj.name, 'Tester', 'Name set in prototype');
+    assert.strictEqual(Obj.name, 'Tester', 'Name set in prototype');
   });
 
   it('uses .proxy', function () {
@@ -198,10 +198,10 @@ describe('UberProto', function () {
     var inst = Obj.create('Tester');
     var proxied = inst.proxy('test');
 
-    assert.equal(proxied('arg'), 'Tester arg', 'Callback set scope properly'); // eslint-ignore-line
+    assert.strictEqual(proxied('arg'), 'Tester arg', 'Callback set scope properly'); // eslint-ignore-line
 
     proxied = inst.proxy('test', 'partialed');
-    assert.equal(proxied(), 'Tester partialed', 'Callback partially applied');
+    assert.strictEqual(proxied(), 'Tester partialed', 'Callback partially applied');
   });
 
   describe('Babel transpiled classes (#10)', function () {
@@ -214,7 +214,7 @@ describe('UberProto', function () {
     it('works with Babel transpiled classes (#10)', function () {
       var person = new classes.Person('John');
 
-      assert.equal(person.sayHi(), 'Hi John');
+      assert.strictEqual(person.sayHi(), 'Hi John');
 
       Proto.mixin({
         sayHi: function () {
@@ -222,11 +222,11 @@ describe('UberProto', function () {
         }
       }, person);
 
-      assert.equal(person.sayHi(), 'Hi John!!');
+      assert.strictEqual(person.sayHi(), 'Hi John!!');
 
       var otherPerson = new classes.OtherPerson();
 
-      assert.equal(otherPerson.sayHi(), 'Hi David Luecke');
+      assert.strictEqual(otherPerson.sayHi(), 'Hi David Luecke');
 
       Proto.mixin({
         sayHi: function () {
@@ -234,20 +234,20 @@ describe('UberProto', function () {
         }
       }, otherPerson);
 
-      assert.equal(otherPerson.sayHi(), 'Hi David Luecke???');
+      assert.strictEqual(otherPerson.sayHi(), 'Hi David Luecke???');
       assert.ok(otherPerson.test());
     });
 
     it('can extend from Babel transpiled classes (#10)', function () {
       var otherPerson = new classes.OtherPerson();
 
-      assert.equal(otherPerson.sayHi(), 'Hi David Luecke');
+      assert.strictEqual(otherPerson.sayHi(), 'Hi David Luecke');
 
       var extended = Proto.extend(otherPerson);
 
-      assert.equal(typeof extended.sayHi, 'function');
+      assert.strictEqual(typeof extended.sayHi, 'function');
 
-      assert.equal(extended.sayHi(), 'Hi David Luecke');
+      assert.strictEqual(extended.sayHi(), 'Hi David Luecke');
       assert.ok(extended.test());
 
       assert.ok(!Object.getOwnPropertyDescriptor(extended, 'sayHi').enumerable);
@@ -260,7 +260,7 @@ describe('UberProto', function () {
         }
       });
 
-      assert.equal(extext.sayHi(), 'Hi David Luecke!!!');
+      assert.strictEqual(extext.sayHi(), 'Hi David Luecke!!!');
     });
   });
 });
