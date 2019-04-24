@@ -1,4 +1,4 @@
-const assert = require('assert');
+const { strict: assert } = require('assert');
 const Proto = require('../lib/proto');
 
 describe('UberProto', function () {
