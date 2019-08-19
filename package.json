@@ -42,7 +42,7 @@
   "devDependencies": {
     "mocha": "^6.1.4",
     "istanbul": "^1.1.0-alpha.1",
-    "semistandard": "^13.0.1",
+    "semistandard": "^14.0.0",
     "shx": "^0.3.2",
     "uglify-js": "^3.4.0"
   },
