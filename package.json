@@ -40,7 +40,7 @@
     ]
   },
   "devDependencies": {
-    "mocha": "^6.1.4",
+    "mocha": "^7.0.1",
     "istanbul": "^1.1.0-alpha.1",
     "semistandard": "^13.0.1",
     "shx": "^0.3.2",
