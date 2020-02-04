@@ -34,9 +34,9 @@ describe('UberProto', function () {
         assert.ok(true, 'Init called');
         this.name = name;
       },
-      test: function () {
+      test: Object.assign(function () {
         return this.name;
-      }
+      }, { testProp: true })
     });
 
     Obj.test[testProp] = true;
@@ -57,6 +57,8 @@ describe('UberProto', function () {
     assert.strictEqual(inst.test(), 'Tester mixed in');
     assert.ok(Obj.test[testProp], 'Symbol conserved on method (Obj)');
     assert.ok(inst.test[testProp], 'Symbol conserved on method (inst)');
+    assert.ok(Obj.test.testProp, 'prop conserved on method (Obj)');
+    assert.ok(inst.test.testProp, 'prop conserved on method (inst)');
     assert.ok(!inst.otherTest());
   });
 

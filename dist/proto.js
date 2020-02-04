@@ -38,6 +38,12 @@
       return ret;
     };
 
+    if (isFunction) {
+      Object.getOwnPropertyNames(old).forEach(function (name) {
+        newMethod[name] = old[name];
+      });
+    }
+
     if (isFunction && HAS_SYMBOLS) {
       Object.getOwnPropertySymbols(old).forEach(function (name) {
         newMethod[name] = old[name];
