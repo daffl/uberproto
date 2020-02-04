@@ -1,5 +1,14 @@
 # Change Log
 
+## [v2.0.5](https://github.com/daffl/uberproto/tree/v2.0.5) (2020-02-04)
+[Full Changelog](https://github.com/daffl/uberproto/compare/v2.0.4...v2.0.5)
+
+**Merged pull requests:**
+
+- Update all dependencies [\#24](https://github.com/daffl/uberproto/pull/24) ([daffl](https://github.com/daffl))
+- Conserve properties on functions [\#23](https://github.com/daffl/uberproto/pull/23) ([bertho-zero](https://github.com/bertho-zero))
+- Update dependencies to enable Greenkeeper 🌴 [\#20](https://github.com/daffl/uberproto/pull/20) ([greenkeeper[bot]](https://github.com/apps/greenkeeper))
+
 ## [v2.0.4](https://github.com/daffl/uberproto/tree/v2.0.4) (2018-08-02)
 [Full Changelog](https://github.com/daffl/uberproto/compare/v2.0.3...v2.0.4)
 
@@ -88,7 +97,7 @@
 **Merged pull requests:**
 
 - Added shim for getPrototypeOf so it works in IE8 [\#3](https://github.com/daffl/uberproto/pull/3) ([sporto](https://github.com/sporto))
-- Fixed example on custom init [\#2](https://github.com/daffl/uberproto/pull/2) ([gabrieleds](https://github.com/gabrieleds))
+- Fixed example on custom init [\#2](https://github.com/daffl/uberproto/pull/2) ([bbtx0](https://github.com/bbtx0))
 
 ## [1.0.2](https://github.com/daffl/uberproto/tree/1.0.2) (2012-05-10)
 [Full Changelog](https://github.com/daffl/uberproto/compare/1.0.1...1.0.2)
