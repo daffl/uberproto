@@ -80,8 +80,8 @@ describe('UberProto', function () {
     assert.strictEqual(inst.name, 'Tester', 'Name set');
     assert.strictEqual(inst.prop, 'Testing', 'Prototype property still there');
     assert.strictEqual(inst.sayHi(), 'Hi Tester', 'Said hi with name');
-    assert.ok(Proto.isPrototypeOf(Obj), 'Should have prototype of Proto');
-    assert.ok(Obj.isPrototypeOf(inst), 'Instance should have prototype of Obj');
+    assert.ok(Proto.isPrototypeOf(Obj), 'Should have prototype of Proto'); // eslint-disable-line
+    assert.ok(Obj.isPrototypeOf(inst), 'Instance should have prototype of Obj'); // eslint-disable-line
   });
 
   it('uses an init method alias', function () {
