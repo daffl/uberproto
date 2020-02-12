@@ -1,5 +1,16 @@
 # Change Log
 
+## [v2.0.6](https://github.com/daffl/uberproto/tree/v2.0.6) (2020-02-12)
+[Full Changelog](https://github.com/daffl/uberproto/compare/v2.0.5...v2.0.6)
+
+**Closed issues:**
+
+- Cannot assign to readonly property ... [\#25](https://github.com/daffl/uberproto/issues/25)
+
+**Merged pull requests:**
+
+- Only copy function keys [\#26](https://github.com/daffl/uberproto/pull/26) ([daffl](https://github.com/daffl))
+
 ## [v2.0.5](https://github.com/daffl/uberproto/tree/v2.0.5) (2020-02-04)
 [Full Changelog](https://github.com/daffl/uberproto/compare/v2.0.4...v2.0.5)
 
