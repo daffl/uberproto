@@ -254,6 +254,30 @@ singHello() // Laaaa Laalaaa! Helloooooo!
 
 `proxy` only works on objects extended from UberProto.
 
+### Named extend and mixin
+Both `Proto.extend()` and `Proto.mixin()` has an optional third parameter where you can name the methods and symbols you want to extend your object with e.g.:
+
+``` javascript
+operaSinger.mixin({
+	sing : function(text){
+		return this._super() + ' ' + text;
+	},
+	sang : function(text) {
+		return this.sing() + ' Lolololooo! ' + text;
+	},
+	sung : function(text) {
+		return this.sing() + ' Dodododooo! ' + text;
+	}
+}, undefined, [ 'sang', 'sing' ]);
+
+var singHello = operaSinger.proxy('sing', 'Helloooooo!');
+var sangHello = operaSinger.proxy('sang', 'Helloooooo!');
+
+singHello() // Laaaa Laalaaa! Helloooooo!
+sangHello() // Laaaa Laalaaa! Lolololooo! Helloooooo!
+var sungHello = operaSinger.proxy('sung', 'Helloooooo!'); // results in error
+```
+
 ## License
 
 MIT License
