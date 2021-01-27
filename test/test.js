@@ -265,4 +265,150 @@ describe('UberProto', function () {
       assert.strictEqual(extext.sayHi(), 'Hi David Luecke!!!');
     });
   });
+
+  describe('Named extend and mixin', () => {
+    it('extends objects with name', function () {
+      var Original = {
+        sayHello () {
+          assert.ok(true, 'sayHello called');
+          return 'hello';
+        }
+      };
+      var Extended = Proto.extend(Original);
+      Extended = Extended.extend({
+        sayHi: function () {
+          assert.ok(true, 'sayHi called');
+          return 'hi';
+        },
+        sayYo: function () {
+          assert.ok(true, 'sayYo called');
+          return 'yo';
+        }
+      }, undefined, ['sayHi']);
+
+      assert.strictEqual(Extended.create().sayHi(), 'hi', 'Said hi');
+      assert.strictEqual(Extended.create().sayHello(), 'hello', 'Said hello');
+      assert.strictEqual(typeof Extended.create().sayYo, 'undefined', 'Cannot Say yo');
+    });
+
+    it('extends objects with names', function () {
+      var Original = {
+        sayHello: function () {
+          assert.ok(true, 'sayHello called');
+          return 'hello';
+        }
+      };
+      var Extended = Proto.extend(Original);
+      Extended = Extended.extend({
+        sayHi: function () {
+          assert.ok(true, 'sayHi called');
+          return 'hi';
+        },
+        sayYo: function () {
+          assert.ok(true, 'sayYo called');
+          return 'yo';
+        }
+      }, undefined, ['sayHi', 'sayYo']);
+
+      assert.strictEqual(Extended.create().sayHi(), 'hi', 'Said hi');
+      assert.strictEqual(Extended.create().sayHello(), 'hello', 'Said hello');
+      assert.strictEqual(Extended.create().sayYo(), 'yo', 'Said yo');
+    });
+
+    it('extends objects with all', function () {
+      var Original = {
+        sayHello: function () {
+          assert.ok(true, 'sayHello called');
+          return 'hello';
+        }
+      };
+      var Extended = Proto.extend(Original);
+      Extended = Extended.extend({
+        sayHi: function () {
+          assert.ok(true, 'sayHi called');
+          return 'hi';
+        },
+        sayYo: function () {
+          assert.ok(true, 'sayYo called');
+          return 'yo';
+        }
+      });
+
+      assert.strictEqual(Extended.create().sayHi(), 'hi', 'Said hi');
+      assert.strictEqual(Extended.create().sayHello(), 'hello', 'Said hello');
+      assert.strictEqual(Extended.create().sayYo(), 'yo', 'Said yo');
+    });
+
+    it('mixin objects with name', function () {
+      var Original = {
+        sayHello: function () {
+          assert.ok(true, 'sayHello called');
+          return 'hello';
+        }
+      };
+      var Mixined = Proto.mixin(Original);
+      Mixined = Mixined.mixin({
+        sayHi: function () {
+          assert.ok(true, 'sayHi called');
+          return 'hi';
+        },
+        sayYo: function () {
+          assert.ok(true, 'sayYo called');
+          return 'yo';
+        }
+      }, undefined, ['sayHi']);
+
+      assert.strictEqual(Mixined.create().sayHi(), 'hi', 'Said hi');
+      assert.strictEqual(Mixined.create().sayHello(), 'hello', 'Said hello');
+      assert.strictEqual(typeof Mixined.create().sayYo, 'undefined', 'Cannot Say yo');
+    });
+
+    it('extends objects with names', function () {
+      var Original = {
+        sayHello: function () {
+          assert.ok(true, 'sayHello called');
+          return 'hello';
+        }
+      };
+      var Mixined = Proto.mixin(Original);
+      Mixined = Mixined.mixin({
+        sayHi: function () {
+          assert.ok(true, 'sayHi called');
+          return 'hi';
+        },
+        sayYo: function () {
+          assert.ok(true, 'sayYo called');
+          return 'yo';
+        }
+      }, undefined, ['sayHi', 'sayYo']);
+
+      assert.strictEqual(Mixined.create().sayHi(), 'hi', 'Said hi');
+      assert.strictEqual(Mixined.create().sayHello(), 'hello', 'Said hello');
+      assert.strictEqual(Mixined.create().sayYo(), 'yo', 'Said yo');
+    });
+
+    it('extends objects with all', function () {
+      var Original = {
+        sayHello: function () {
+          assert.ok(true, 'sayHello called');
+          return 'hello';
+        }
+      };
+      var Mixined = Proto.mixin(Original);
+      Mixined = Mixined.mixin({
+        sayHi: function () {
+          assert.ok(true, 'sayHi called');
+          return 'hi';
+        },
+        sayYo: function () {
+          assert.ok(true, 'sayYo called');
+          return 'yo';
+        }
+      });
+
+      assert.strictEqual(Mixined.create().sayHi(), 'hi', 'Said hi');
+      assert.strictEqual(Mixined.create().sayHello(), 'hello', 'Said hello');
+      assert.strictEqual(Mixined.create().sayYo(), 'yo', 'Said yo');
+    });
+  });
 });
